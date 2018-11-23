@@ -7,9 +7,6 @@ body {
   overflow-x: hidden;
   width: 100vw;
 }
-:root {
-   --btn-color: hsl(207, 100%, 63%);
-}
 /*----------------
     BUTTONS
 ----------------*/
@@ -67,7 +64,7 @@ body {
 
 .logo h1 {
   letter-spacing: 3px;
-  color: #43a9ff;
+  color: hsl(207, 100%, 63%);
   margin-bottom: -0.5rem;
   text-transform: uppercase;
   transform: scaleY(0.9);
@@ -96,7 +93,7 @@ body {
   position: relative;
   display: block;
   margin: 5rem auto 0 auto;
-  color: var(--btn-color);
+  color: hsl(207, 100%, 63%);
   text-transform: uppercase;
   border-radius: 1000px;
 }
@@ -132,7 +129,7 @@ body {
 
 .sinfo-btn {
  text-transform: uppercase;
- color: var(--btn-color);
+ color:hsl(207, 100%, 63%);
 }
 
 /*----------------
