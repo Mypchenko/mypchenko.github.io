@@ -264,6 +264,32 @@ body {
 }
 
 /*----------------
+    FOOTER
+----------------*/
+
+.footer {
+  position: relative;
+  text-align: center;
+  padding-top: 8rem;
+}
+
+.footer span, h1, button {
+  position: relative;
+  z-index: 2;
+}
+
+.footer-btn {
+  margin: 4rem 0;
+  color: hsl(207, 100%, 63%);
+  text-transform: uppercase;
+}
+
+.footer-img {
+  position: absolute;
+  left: 0; top: 10rem;
+  width: 100%;
+}
+/*----------------
     TYPOGRAPHY
 ----------------*/
 
