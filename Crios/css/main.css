@@ -65,7 +65,7 @@ body {
 .logo h1 {
   letter-spacing: 3px;
   color: hsl(207, 100%, 63%);
-  margin-bottom: -0.5rem;
+  margin-bottom: 0;
   text-transform: uppercase;
   transform: scaleY(0.9);
 }
@@ -81,7 +81,7 @@ body {
   width: 100%;
   height: max-content;
   margin-bottom: 0;
-  padding-top: 15rem;
+  padding-top: 12rem;
   text-align: center;
 }
 
@@ -113,7 +113,7 @@ body {
 ----------------*/
 .sinfo {
   text-align: center;
-  padding: 8rem 0;
+  padding: 0 0 5rem 0;
 }
 
 .block {
@@ -137,13 +137,140 @@ body {
 }
 
 /*----------------
+    BOXES
+----------------*/
+
+.boxes {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  z-index: 2;
+}
+
+.box {
+  width: 100%;
+  height: max-content;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  background-color: #f7f8fb;
+}
+
+.box-img {
+  width: 50%;
+}
+
+.box-text {
+  text-align: left;
+  padding: 2rem 10% 2rem 10%;
+  width: 50%;
+  height: 200%;
+}
+
+/*----------------
+    APPS
+----------------*/
+
+.apps {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  width: 100%;
+  padding: 5rem 12.5%;
+}
+
+.app {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: row;
+}
+
+.app-img, .app-text {
+  width: 50%;
+  padding: 5%;
+}
+
+.app-text {
+  display: block;
+  text-align: left;
+}
+
+.app-text h1 {
+ color:hsl(207, 100%, 63%);
+}
+
+.sflake1, .sflake2 {
+  width: 40%;
+  position: absolute;
+}
+
+.sflake1 {
+  top: -5%; left: -1%;
+}
+
+.sflake2 {
+  bottom: -10%; right: -5%;
+}
+
+/*----------------
+    John Doe
+----------------*/
+
+.johndoe {
+  position: relative;
+  display: flex;
+  width: 100%;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  background: white;
+}
+
+.overlay {
+  position: absolute;
+  display: block;
+  width: 100%;
+  height: 100%;
+  background-color: hsl(225, 33%, 76%);
+  opacity: 0.1;
+}
+
+.johndoe-img, .johndoe-text {
+  width: 50%;
+}
+
+.johndoe-text {
+  text-align: left;
+  padding: 5%;
+  padding-bottom: 0;
+}
+
+.johndoe-text h1 {
+  color: #fe3254;
+}
+
+.ceo {
+  color: hsl(0, 0%, 8%);
+  margin-top: 4rem;
+  margin-bottom: 1rem;
+}
+
+/*----------------
     TYPOGRAPHY
 ----------------*/
 
 h1 {
   font-size: 2.5rem;
   font-weight: 500;
-  margin: 1.5rem;
+  margin: 1.5rem 0;
 }
 
 h2 {
@@ -154,11 +281,21 @@ h2 {
 
 p {
   font-weight: 500;
+  line-height: 1.5rem;
   color: hsl(213, 9%, 81%);
 }
 
 span {
+  display: block;
   color: hsl(213, 9%, 81%);
   font-weight: 600;
   letter-spacing: 0.1rem;
 }
+
+/*----------------
+    @MEDIA
+
+    >820px
+    >450px
+
+----------------*/
