@@ -117,7 +117,7 @@ body {
 }
 
 .block {
-  width: 18%;
+  width: 20%;
 }
 
 .items {
@@ -132,6 +132,7 @@ body {
 }
 
 .sinfo-btn {
+ line-height: 1.5rem;
  text-transform: uppercase;
  color:hsl(207, 100%, 63%);
 }
@@ -182,6 +183,7 @@ body {
   flex-direction: column;
   width: 100%;
   padding: 5rem 12.5%;
+  overflow: hidden;
 }
 
 .app {
@@ -307,6 +309,7 @@ h2 {
 
 p {
   font-weight: 500;
+  font-size: 1.1rem;
   line-height: 1.5rem;
   color: hsl(213, 9%, 81%);
 }
@@ -325,3 +328,83 @@ span {
     >450px
 
 ----------------*/
+
+@media only screen and (max-width: 800px) {
+  html {
+    font-size: 10px;
+  }
+ .header {
+   position: relative;
+ }
+ .main {
+   padding-top: 0;
+ }
+ .block {
+   width: 23%;
+ }
+ .sinfo-btn {
+   font-size: 1.2rem;
+ }
+ .box-text {
+  padding: 1rem 3% 1rem 3%;
+ }
+}
+
+@media only screen and (max-width: 560px) {
+  html {
+    font-size: 9px;
+  }
+  h1 {
+    font-size: 1.8rem;
+  }
+  h2 {
+    padding: 1.4rem 0;
+  }
+  .main-btn {
+    font-size: 1.2rem;
+  }
+  .items {
+    flex-direction: column;
+    padding: 2rem 0;
+  }
+  .info-icon {
+    width: 25%;
+  }
+  .block {
+    width: 100%;
+    padding: 3rem;
+  }
+  .box {
+    flex-direction: column;
+  }
+  .box:last-child {
+    flex-direction: column-reverse;
+  }
+  .box-text, .box-img {
+    width: 100%;
+  }
+  .box-text {
+    text-align: justify;
+    padding: 0 1rem 4rem 1rem;
+  }
+  .apps {
+    padding: 2rem 0;
+  }
+  .app-img {
+    padding: 0;
+  }
+  .app:first-child .app-text {
+    padding: 0;
+    padding-right: 2rem;
+  }
+  .app:last-child .app-text {
+    padding: 0;
+    padding-left: 2rem;
+  }
+  .johndoe-text {
+    padding: 2rem 0;
+  }
+  .johndoe-img {
+    width: 40%;
+  }
+}
