@@ -402,9 +402,13 @@ span {
     padding-left: 2rem;
   }
   .johndoe-text {
-    padding: 2rem 0;
+    padding: 0rem 0;
   }
   .johndoe-img {
-    width: 40%;
+    width: 45%;
+    margin-top: auto;
+  }
+  .ceo {
+    margin-top: 2rem;
   }
 }
