@@ -20,56 +20,56 @@ html {
   font-family: 'Open Sans', sans-serif;
   font-size: 16px;
 }
-
-/*
-    HEADER
-*/
-.header {
+.intro {
   background: $bright-bg;
-  display: flex;
-  flex-direction: row;
-  justify-content: space-between;
-  align-items: flex-end;
-  padding: 0 16.665%;
-  height: 9rem;
-  color: $second-text;
-  font-weight: bold;
-  font-size: 3.4rem;
-
-  .header-span {
-    font-size: 1.4rem;
-    font-weight: 300;
-    letter-spacing: 0.08rem;
-  }
-}
-.main {
-  background: $bright-bg;
-  display: flex;
-  height: 52rem;
-  flex-direction: column;
-  justify-content: space-around;
-  align-items: center;
-
-  p {
-    text-align: center;
-    width: 57%;
-  }
-
-  .main-img {
-    width: 12rem;
-  }
-
-  .main-span {
-    font-family: 'Muli', 'Open Sans';
-    font-weight: 300;
-  }
-
-  .main-btn {
-    @include btn;
-    background: $dark-bg;
+  .header {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: flex-end;
+    margin: 0 auto;
+    width: 80rem;
+    height: 9rem;
     color: $second-text;
-    font-size: 1.85rem;
-    letter-spacing: 0.08rem;
+    font-weight: bold;
+    font-size: 3.4rem;
+
+    .header-span {
+      font-size: 1.4rem;
+      font-weight: 300;
+      letter-spacing: 0.08rem;
+    }
+  }
+  .main {
+    display: flex;
+    margin: 0 auto;
+    width: 80rem;
+    height: 52rem;
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: center;
+
+    p {
+      text-align: center;
+      width: 57%;
+    }
+
+    .main-img {
+      width: 12rem;
+    }
+
+    .main-span {
+      font-family: 'Muli', 'Open Sans';
+      font-weight: 300;
+    }
+
+    .main-btn {
+      @include btn;
+      background: $dark-bg;
+      color: $second-text;
+      font-size: 1.85rem;
+      letter-spacing: 0.08rem;
+    }
   }
 }
 
