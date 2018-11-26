@@ -1,0 +1,99 @@
+@import url('https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700');
+@import url('https://fonts.googleapis.com/css?family=Muli:300,700');
+
+$dark-bg: #344b61;
+$bright-bg: #f57979;
+$main-text: #262626;
+$second-text: #ffffff;
+$placeholder: #f7f7f7;
+
+@mixin btn {
+  border: none;
+  border-radius: 1000px;
+  height: 80px;
+  width: 290px;
+  outline: none;
+  cursor: pointer;
+}
+
+html {
+  font-family: 'Open Sans', sans-serif;
+  font-size: 16px;
+}
+
+/*
+    HEADER
+*/
+.header {
+  background: $bright-bg;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: flex-end;
+  padding: 0 16.665%;
+  height: 9rem;
+  color: $second-text;
+  font-weight: bold;
+  font-size: 3.4rem;
+
+  .header-span {
+    font-size: 1.4rem;
+    font-weight: 300;
+    letter-spacing: 0.08rem;
+  }
+}
+.main {
+  background: $bright-bg;
+  display: flex;
+  height: 52rem;
+  flex-direction: column;
+  justify-content: space-around;
+  align-items: center;
+
+  p {
+    text-align: center;
+    width: 57%;
+  }
+
+  .main-img {
+    width: 12rem;
+  }
+
+  .main-span {
+    font-family: 'Muli', 'Open Sans';
+    font-weight: 300;
+  }
+
+  .main-btn {
+    @include btn;
+    background: $dark-bg;
+    color: $second-text;
+    font-size: 1.85rem;
+    letter-spacing: 0.08rem;
+  }
+}
+
+/*
+    TYPOGRAPHY
+*/
+
+h1 {
+  color: $second-text;
+  font-size: 6rem;
+  font-weight: bold;
+}
+h2 {
+
+}
+h3 {
+
+}
+h4 {
+
+}
+p {
+  color: $second-text;
+  font-size: 1.6rem;
+  letter-spacing: 0.12rem;
+  font-weight: 300;
+}
