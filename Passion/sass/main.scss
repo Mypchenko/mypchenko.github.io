@@ -21,13 +21,15 @@ html {
   font-size: 16px;
 }
 .intro {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
   background: $bright-bg;
   .header {
     display: flex;
     flex-direction: row;
     justify-content: space-between;
     align-items: flex-end;
-    margin: 0 auto;
     width: 80rem;
     height: 9rem;
     color: $second-text;
@@ -42,7 +44,6 @@ html {
   }
   .main {
     display: flex;
-    margin: 0 auto;
     width: 80rem;
     height: 52rem;
     flex-direction: column;
