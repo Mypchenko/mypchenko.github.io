@@ -37,7 +37,7 @@ html {
     font-size: 3.4rem;
 
     .header-span {
-      font-size: 1.4rem;
+      font-size: 1.5rem;
       font-weight: 300;
       letter-spacing: 0.08rem;
     }
@@ -47,16 +47,18 @@ html {
     width: 80rem;
     height: 52rem;
     flex-direction: column;
-    justify-content: space-around;
+    justify-content: none;
     align-items: center;
 
     p {
       text-align: center;
-      width: 57%;
+      width: 70rem;
+      margin: 5rem 0;
     }
 
     .main-img {
       width: 12rem;
+      margin: 3rem 0;
     }
 
     .main-span {
@@ -82,6 +84,7 @@ h1 {
   color: $second-text;
   font-size: 6rem;
   font-weight: bold;
+  margin-top: 1rem;
 }
 h2 {
 
