@@ -6,6 +6,7 @@ $bright-bg: #f57979;
 $main-text: #262626;
 $second-text: #ffffff;
 $placeholder: #f7f7f7;
+$main-width: 80rem;
 
 @mixin btn {
   border: none;
@@ -19,7 +20,10 @@ $placeholder: #f7f7f7;
 html {
   font-family: 'Open Sans', sans-serif;
   font-size: 16px;
+  background-color: $second-text;
+  overflow-x: hidden;
 }
+
 .intro {
   display: flex;
   flex-direction: column;
@@ -30,7 +34,7 @@ html {
     flex-direction: row;
     justify-content: space-between;
     align-items: flex-end;
-    width: 80rem;
+    width: $main-width;
     height: 9rem;
     color: $second-text;
     font-weight: bold;
@@ -44,7 +48,7 @@ html {
   }
   .main {
     display: flex;
-    width: 80rem;
+    width: $main-width;
     height: 52rem;
     flex-direction: column;
     justify-content: none;
@@ -76,6 +80,74 @@ html {
   }
 }
 
+.features {
+  position: relative;
+  display: flex;
+  width: 100%;
+  justify-content: center;
+  background-color: $dark-bg;
+
+  &::after {
+    content: "";
+    position: absolute;
+    bottom: -1.3rem;
+    display: block;
+    width: 0;
+    height: 0;
+    border-top: 1.3rem solid $dark-bg;
+    border-left: 2rem solid transparent;
+    border-right: 2rem solid transparent;
+  }
+
+
+  .content {
+    width: $main-width;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+
+    .feature-box {
+      position: relative;
+      width: 33.33%;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      padding-top: 7.5rem;
+      padding-bottom: 12rem;
+
+      .feature-img {
+        width: 3.5rem;
+        margin-bottom: 4rem;
+      }
+
+      .feature-link {
+        position: absolute;
+        top: 18.5rem;
+        color: $bright-bg;
+        font-family: 'Muli', 'Open Sans';
+        font-weight: 300;
+        text-decoration: none;
+        font-size: 1.7rem;
+
+        &::after {
+          content: "";
+          display: block;
+          transition: 0.3s;
+          height: 3px;
+          margin-top: 2px;
+          background: $bright-bg;
+          transform: scaleX(0);
+        }
+
+        &:hover:after {
+          height: 2.5px;
+          transform: scaleX(1);
+        }
+      }
+    }
+  }
+}
 /*
     TYPOGRAPHY
 */
@@ -93,7 +165,10 @@ h3 {
 
 }
 h4 {
-
+  color: $second-text;
+  font-weight: 600;
+  font-size: 2.7rem;
+  letter-spacing: -0.08rem;
 }
 p {
   color: $second-text;
