@@ -5,6 +5,7 @@ $dark-bg: #344b61;
 $bright-bg: #f57979;
 $main-text: #262626;
 $second-text: #ffffff;
+$dark-text: #808080;
 $placeholder: #f7f7f7;
 $main-width: 80rem;
 
@@ -22,6 +23,10 @@ html {
   font-size: 16px;
   background-color: $second-text;
   overflow-x: hidden;
+  a {
+    text-decoration: none;
+    color: inherit;
+  }
 }
 
 .intro {
@@ -90,7 +95,7 @@ html {
   &::after {
     content: "";
     position: absolute;
-    bottom: -1.3rem;
+    bottom: -1.2rem;
     display: block;
     width: 0;
     height: 0;
@@ -148,6 +153,70 @@ html {
     }
   }
 }
+
+.blog {
+  display: flex;
+  width: 100%;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding-top: 8rem;
+  padding-bottom: 6rem;
+
+  .blog-content {
+    width: $main-width;
+
+    .blog-img {
+      display: block;
+      width: 100%;
+      min-height: 30rem;
+      background: $placeholder;
+    }
+
+    .blog-heading {
+      display: flex;
+      flex-direction: row;
+      justify-content: space-between;
+      align-items: flex-end;
+      height: 6rem;
+
+      .blog-links {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+
+
+        img {
+          width: 2rem;
+          margin: 0 1rem;
+        }
+        .profile-link {
+          color: $bright-bg;
+          font-size: 2rem;
+          margin: 0 0.5rem;
+        }
+      }
+    }
+
+    p {
+      color: $dark-text;
+      margin-top: 4rem;
+      margin-bottom: 3rem;
+      font-weight: 400;
+      hyphens: auto;
+    }
+
+    .blog-button {
+      @include btn;
+      width: 15rem;
+      background-color: $bright-bg;
+      color: $second-text;
+      font-weight: 400;
+      font-size: 2rem;
+    }
+  }
+}
+
 /*
     TYPOGRAPHY
 */
@@ -162,7 +231,9 @@ h2 {
 
 }
 h3 {
-
+  font-size: 3rem;
+  color: $main-text;
+  font-weight: 700;
 }
 h4 {
   color: $second-text;
@@ -175,4 +246,5 @@ p {
   font-size: 1.6rem;
   letter-spacing: 0.12rem;
   font-weight: 300;
+  line-height: 3rem;
 }
