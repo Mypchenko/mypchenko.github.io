@@ -17,6 +17,22 @@ $main-width: 80rem;
   outline: none;
   cursor: pointer;
 }
+@mixin link-animation {
+    &::after {
+    content: "";
+    display: block;
+    transition: 0.3s;
+    height: 3px;
+    margin-top: 2px;
+    background: $bright-bg;
+    transform: scaleX(0);
+  }
+
+  &:hover:after {
+    height: 2.5px;
+    transform: scaleX(1);
+  }
+}
 
 html {
   font-family: 'Open Sans', sans-serif;
@@ -127,6 +143,8 @@ html {
       }
 
       .feature-link {
+        @include link-animation;
+
         position: absolute;
         top: 18.5rem;
         color: $bright-bg;
@@ -134,21 +152,6 @@ html {
         font-weight: 300;
         text-decoration: none;
         font-size: 1.7rem;
-
-        &::after {
-          content: "";
-          display: block;
-          transition: 0.3s;
-          height: 3px;
-          margin-top: 2px;
-          background: $bright-bg;
-          transform: scaleX(0);
-        }
-
-        &:hover:after {
-          height: 2.5px;
-          transform: scaleX(1);
-        }
       }
     }
   }
@@ -191,6 +194,7 @@ html {
           margin: 0 1rem;
         }
         .profile-link {
+          @include link-animation;
           color: $bright-bg;
           font-size: 2rem;
           margin: 0 0.5rem;
