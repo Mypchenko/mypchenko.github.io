@@ -308,6 +308,60 @@ html {
   }
 }
 
+.concepts {
+  background-color: $second-text;
+
+  .concepts-content {
+    width: $main-width;
+    margin: 0 auto;
+
+    .concept-divider {
+      width: 100vw;
+      height: 2px;
+      background-color: $dark-placeholder;
+      position: absolute;
+      left: 0;
+    }
+
+    .concept {
+      width: 100%;
+      padding: 6rem 0;
+      display: flex;
+
+      .concept-text {
+        p {
+          margin: 3rem 0;
+        }
+
+        .concept-btn {
+          @include btn;
+          background-color: $bright-bg;
+          color: $second-text;
+          font-size: 2.2rem;
+        }
+      }
+
+      img {
+        display: block;
+        min-width: 20rem;
+        min-height: 20rem;
+        max-width: 20rem;
+        max-height: 20rem;
+        margin-top: 1rem;
+        background-color: $dark-placeholder;
+      }
+
+      &:first-child .concept-text {
+        padding-left: 5rem;
+      }
+
+      &:last-child .concept-text {
+        padding-right: 5rem;
+      }
+    }
+  }
+}
+
 /*
     TYPOGRAPHY
 */
@@ -346,4 +400,7 @@ p {
   color: $dark-text;
   font-weight: 400;
   hyphens: auto;
+}
+b {
+  font-weight: 700;
 }
