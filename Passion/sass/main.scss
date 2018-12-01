@@ -1,5 +1,5 @@
 @import url('https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700');
-@import url('https://fonts.googleapis.com/css?family=Muli:300,700');
+@import url('https://fonts.googleapis.com/css?family=Muli:300,400,700');
 
 $dark-bg: #344b61;
 $bright-bg: #f57979;
@@ -362,6 +362,67 @@ html {
   }
 }
 
+.testimonials {
+  padding: 7rem;
+  background-color: $bright-bg;
+
+  .testimonials-content {
+    width: $main-width;
+    margin: 0 auto;
+    text-align: center;
+
+    h3 {
+      color: $second-text;
+
+      &::after {
+        content: "";
+        display: block;
+        height: 2px;
+        width: 15rem;
+        background: $second-text;
+        margin: 4rem auto 0 auto;
+      }
+    }
+    .testimonial-description {
+      color: $second-text;
+      padding: 4rem 0;
+      text-align: left;
+    }
+    .testimonial-container {
+      width: 100%;
+      display: flex;
+      flex-direction: row;
+      justify-content: space-between;
+      align-items: center;
+
+      .testimonial {
+        width: 45%;
+        border-radius: 0.5rem;
+        background: $second-text;
+        padding: 2rem;
+
+        .testimonial-img {
+          display: block;
+          border-radius: 1000px;
+          width: 10rem;
+          height: 10rem;
+          background: $dark-placeholder;
+          margin: 0 auto 3rem auto;
+        }
+        .testimonial-footer {
+          font-family: 'Muli';
+          font-weight: 400;
+          margin: 2rem 0;
+
+          .testimonial-link {
+            color: $bright-bg;
+          }
+        }
+      }
+    }
+  }
+}
+
 /*
     TYPOGRAPHY
 */
@@ -394,7 +455,7 @@ h5 {
 }
 p {
   color: $second-text;
-  font-size: 1.6rem;
+  font-size: 1.5rem;
   letter-spacing: 0.12rem;
   line-height: 3rem;
   color: $dark-text;
