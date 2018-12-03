@@ -231,7 +231,7 @@ html {
 
 .gallery {
   background-color: $placeholder;
-  padding: 6rem;
+  padding: 6rem 0;
 
   .gallery-content {
     width: $main-width;
@@ -304,7 +304,6 @@ html {
         }
       }
     }
-
   }
 }
 
@@ -363,7 +362,7 @@ html {
 }
 
 .testimonials {
-  padding: 7rem;
+  padding: 7rem 0;
   background-color: $bright-bg;
 
   .testimonials-content {
@@ -418,6 +417,87 @@ html {
             color: $bright-bg;
           }
         }
+      }
+    }
+  }
+}
+
+.columns {
+  padding: 5rem 0;
+  position: relative;
+
+  .columns-content {
+    width: $main-width;
+    margin: 0 auto;
+
+    .columns-divider {
+      left: 0;
+      position: absolute;
+      width: 100vw;
+      height: 2px;
+      background-color: $dark-placeholder;
+    }
+
+    .first-block {
+      padding: 0 2rem;
+      width: 100%;
+      height: max-content;
+      display: flex;
+      text-align: center;
+
+      .column-img {
+        display: block;
+        background-color: $dark-placeholder;
+        width: 23rem;
+        height: 23rem;
+        border-radius: 1000px
+      }
+      .column-btn {
+        @include btn;
+        background-color: $bright-bg;
+        color: $second-text;
+        font-size: 1.7rem;
+        width: 15rem;
+        height: 4rem;
+        margin: 4rem 0;
+      }
+      .block-content {
+        width: 50%;
+        padding: 2rem;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+      }
+      h3 {
+        padding: 3rem 0;
+      }
+      p {
+        line-height: 2.2rem;
+      }
+    }
+    .second-block {
+      width: 100%;
+      display: flex;
+      a {
+        color: $bright-bg;
+        display: block;
+        padding: 1rem 0;
+      }
+      h3 {
+        margin: 4rem 0;
+      }
+      p {
+        padding-right: 3rem;
+        line-height: 2.2rem;
+      }
+      img {
+        position: relative;
+        top: 0.4rem;
+        margin-right: 2rem;
+        display: inline-block;
+        width: 3rem;
+        height: 3rem;
       }
     }
   }
