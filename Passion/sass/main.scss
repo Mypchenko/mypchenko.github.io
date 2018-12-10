@@ -503,6 +503,33 @@ html {
   }
 }
 
+.video {
+  background-color: $dark-bg;
+  text-align: center;
+  padding-bottom: 5rem;
+
+  h3 {
+    color: $second-text;
+    padding: 5rem 0;
+  }
+
+  .video-link {
+    display: block;
+    color: $bright-bg;
+    width: 14.8rem;
+    margin: 0 auto;
+    @include link-animation;
+  }
+
+  .video-iframe {
+    background-color: $dark-placeholder;
+    margin: 5rem auto 0 auto;
+    width: 48rem;
+    height: 27rem;
+    border-radius: 0.5rem;
+  }
+}
+
 /*
     TYPOGRAPHY
 */
