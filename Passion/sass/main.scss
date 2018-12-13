@@ -522,14 +522,126 @@ html {
   }
 
   .video-iframe {
+    display: flex;
+    justify-content: center;
+    align-items: center;
     background-color: $dark-placeholder;
     margin: 5rem auto 0 auto;
     width: 48rem;
     height: 27rem;
     border-radius: 0.5rem;
+
+    .video-icon {
+      display: block;
+      width: 8rem;
+      -webkit-filter: drop-shadow( 2px 2px 8px #6b6b6b );
+      filter: drop-shadow( 2px 2px 8px #6b6b6b );
+
+    }
   }
 }
 
+.only-text {
+  background-color: $second-text;
+
+  .only-text-content {
+    margin: 0 auto;
+    width: $main-width;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-direction: column;
+    padding: 5rem 0;
+
+    .divider {
+      width: 20%;
+      height: 2px;
+      background-color: $dark-placeholder;
+      margin: 5rem 0;
+    }
+
+    .boxes {
+      display: flex;
+      margin: 3rem 0;
+      width: 100%;
+      flex-direction: row;
+      justify-content: space-between;
+      align-items: center;
+
+      .box {
+        width: 32.5%;
+        background-color: $dark-placeholder;
+        height: 30rem;
+        border-radius: 2px;
+      }
+    }
+
+  }
+}
+
+
+.website {
+  background-color: $dark-bg;
+
+  .website-content {
+    margin: 0 auto;
+    width: $main-width;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+
+    h3 {
+      color: $second-text;
+      margin: 5rem 0;
+    }
+    .website-link {
+      display: block;
+      color: $bright-bg;
+      @include link-animation;
+    }
+
+    .laptop {
+      position: relative;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      align-items: center;
+      width: 100%;
+
+      .laptop-img {
+        position: relative;
+        z-index: 5;
+        display: block;
+        width: 60%;
+      }
+
+      .browser {
+        position: absolute;
+        width: 40rem;
+        height: 26rem;
+        top: 20.5%;
+        background-color: $dark-placeholder;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+
+        .reload {
+          position: absolute;
+          z-index: 10;
+          padding: 1rem 0.75rem 1rem 1.25rem;
+          cursor: pointer;
+          display: block;
+          border-radius: 50%;
+          width: 8rem;
+          -webkit-filter: drop-shadow( 2px 2px 8px #6b6b6b );
+          filter: drop-shadow( 2px 2px 8px #6b6b6b );
+
+        }
+      }
+    }
+  }
+}
 /*
     TYPOGRAPHY
 */
@@ -571,4 +683,7 @@ p {
 }
 b {
   font-weight: 700;
+}
+a {
+      letter-spacing: 0;
 }
