@@ -825,3 +825,31 @@ b {
 a {
       letter-spacing: 0;
 }
+
+/*
+    @MEDIA
+*/
+
+@media only screen and (max-width: 1368px) {
+  html {
+    font-size: 15px;
+  }
+}
+
+@media only screen and (max-width: 1280px) {
+  html {
+    font-size: 14px;
+  }
+}
+
+@media only screen and (max-width: 1024px) {
+  html {
+    font-size: 11px;
+  }
+}
+
+@media only screen and (max-width: 800px) {
+  html {
+    font-size: 9px;
+  }
+}
