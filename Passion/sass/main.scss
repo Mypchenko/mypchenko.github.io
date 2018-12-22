@@ -747,6 +747,39 @@ html {
     }
   }
 }
+
+.info {
+  background-color: $bright-bg;
+  padding: 5rem 0;
+
+  .info-content {
+    width: $main-width;
+    margin: 0 auto;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+
+    .info-img {
+      width: 5rem;
+      margin: 2.5rem 0;
+    }
+    h3, p {
+      color: $second-text;
+    }
+    p {
+      margin: 3rem 0;
+      width: 60rem;
+    }
+    .info-button {
+      @include btn;
+      font-size: 2rem;
+      color: $dark-bg;
+      background-color: $second-text;
+    }
+  }
+}
 /*
     TYPOGRAPHY
 */
