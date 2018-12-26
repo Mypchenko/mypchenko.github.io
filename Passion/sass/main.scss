@@ -780,6 +780,35 @@ html {
     }
   }
 }
+
+.contacts {
+  background-color: $dark-bg;
+  padding: 4rem 0;
+
+  .contacts-content {
+    width: $main-width;
+    margin: 0 auto;
+    display: flex;
+
+    .contacts-block {
+      width: 50%;
+
+      .contacts-icon {
+        display: inline-block;
+        width: 3rem;
+        margin-right: 1rem;
+      }
+      h4 {
+        display: inline;
+        vertical-align: top;
+      }
+      p {
+        color: $second-text;
+        padding-top: 3rem;
+      }
+    }
+  }
+}
 /*
     TYPOGRAPHY
 */
