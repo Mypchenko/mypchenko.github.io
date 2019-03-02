@@ -42,7 +42,8 @@ body {
   align-items: flex-end;
 }
 
-.menu, .search {
+.menu,
+.search {
   display: flex;
   justify-content: center;
   align-items: center;
@@ -132,9 +133,9 @@ body {
 }
 
 .sinfo-btn {
- line-height: 1.5rem;
- text-transform: uppercase;
- color:hsl(207, 100%, 63%);
+  line-height: 1.5rem;
+  text-transform: uppercase;
+  color: hsl(207, 100%, 63%);
 }
 
 /*----------------
@@ -168,7 +169,7 @@ body {
   text-align: left;
   padding: 2rem 10% 2rem 10%;
   width: 50%;
-  height: 200%;
+  height: 100%;
 }
 
 /*----------------
@@ -195,7 +196,8 @@ body {
   flex-direction: row;
 }
 
-.app-img, .app-text {
+.app-img,
+.app-text {
   width: 50%;
   padding: 5%;
 }
@@ -206,20 +208,23 @@ body {
 }
 
 .app-text h1 {
- color:hsl(207, 100%, 63%);
+  color: hsl(207, 100%, 63%);
 }
 
-.sflake1, .sflake2 {
+.sflake1,
+.sflake2 {
   width: 40%;
   position: absolute;
 }
 
 .sflake1 {
-  top: -5%; left: -1%;
+  top: -5%;
+  left: -1%;
 }
 
 .sflake2 {
-  bottom: -10%; right: -5%;
+  bottom: -10%;
+  right: -5%;
 }
 
 /*----------------
@@ -245,7 +250,8 @@ body {
   opacity: 0.1;
 }
 
-.johndoe-img, .johndoe-text {
+.johndoe-img,
+.johndoe-text {
   width: 50%;
 }
 
@@ -275,7 +281,9 @@ body {
   padding-top: 8rem;
 }
 
-.footer span, h1, button {
+.footer span,
+h1,
+button {
   position: relative;
   z-index: 2;
 }
@@ -288,7 +296,8 @@ body {
 
 .footer-img {
   position: absolute;
-  left: 0; top: 10rem;
+  left: 0;
+  top: 10rem;
   width: 100%;
 }
 /*----------------
@@ -333,21 +342,21 @@ span {
   html {
     font-size: 10px;
   }
- .header {
-   position: relative;
- }
- .main {
-   padding-top: 0;
- }
- .block {
-   width: 23%;
- }
- .sinfo-btn {
-   font-size: 1.2rem;
- }
- .box-text {
-  padding: 1rem 3% 1rem 3%;
- }
+  .header {
+    position: relative;
+  }
+  .main {
+    padding-top: 0;
+  }
+  .block {
+    width: 23%;
+  }
+  .sinfo-btn {
+    font-size: 1.2rem;
+  }
+  .box-text {
+    padding: 1rem 3% 1rem 3%;
+  }
 }
 
 @media only screen and (max-width: 560px) {
@@ -380,7 +389,8 @@ span {
   .box:last-child {
     flex-direction: column-reverse;
   }
-  .box-text, .box-img {
+  .box-text,
+  .box-img {
     width: 100%;
   }
   .box-text {
