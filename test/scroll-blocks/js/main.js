@@ -1,5 +1,5 @@
 document.body.onload = () => {
-  document.body.style.paddingTop = `21px`;
+  document.body.style.paddingTop = `25px`;
 
   const elements = document.getElementsByClassName(`scroll-element`);
   for (const entry of elements) {
@@ -14,23 +14,23 @@ document.body.onload = () => {
                  position: fixed;
                  top: -1px;
                  left: -84px;
-                 background: gray;
-                 padding: 0.25rem 6px 0.25rem 0;`;
+                 background-color: #444444;
+                 padding: 0.25rem 6px 0.25rem 0;
+                 box-shadow: 5px 5px 5px 5px rgba(0, 0, 0, 0.5);`;
 
   for (let i = -1; i < elements.length; ++i) {
     const displayNode = document.createElement(`div`);
 
     displayNode.style = `height: 30px;
                    width: 90px;
-                   background: #4b4b4b;
+                   background-color: #444444;
                    margin: 0 6px`;
 
-    if (i === -1) displayNode.style.background = `#e49400`;
+    if (i === -1) displayNode.style.background = `#ffc400`;
     display.appendChild(displayNode);
   }
-  animateScroll();
 
-  // window.addEventListener(`scroll`, animateScroll());
+  animateScroll();
 
   function animateScroll() {
     window.requestAnimationFrame(() => {
@@ -39,9 +39,9 @@ document.body.onload = () => {
       const scroll = pageYOffset + innerHeight;
       for (let i = 0; i < elements.length; ++i) {
         if (scroll + 5 > breakpoints[i]) {
-          displayNodes[i].style.backgroundColor = `#e49400`;
+          displayNodes[i].style.backgroundColor = `#ffc400`;
         } else {
-          displayNodes[i].style.backgroundColor = `#4b4b4b`;
+          displayNodes[i].style.backgroundColor = `#444444`;
         }
       }
       animateScroll();
