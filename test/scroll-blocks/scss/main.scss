@@ -1,0 +1,30 @@
+@font-face {
+  font-family: "hermit";
+  src: url("../Liga-Hermit-medium.otf") format("opentype");
+}
+
+html {
+  background: #4b4b4b;
+
+  * {
+    box-sizing: border-box;
+    margin: 0;
+  }
+}
+
+// .scroll-element {
+//   padding: 1rem 0;
+// }
+
+p {
+  margin: 0 auto;
+  text-align: justify;
+  width: 1000px;
+  color: rgb(204, 204, 204);
+  font-family: "hermit";
+  font-size: 18px;
+  border: 3px solid #e49400;
+  padding: 1em 0;
+  border-left: 0;
+  border-right: 0;
+}
