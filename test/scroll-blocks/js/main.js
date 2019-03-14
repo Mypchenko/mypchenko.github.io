@@ -27,7 +27,7 @@ for (let i = -1; i < elements.length; ++i) {
   display.appendChild(displayNode);
 }
 
-window.addEventListener(`scroll`, animateScroll());
+animateScroll();
 
 function animateScroll() {
   window.requestAnimationFrame(() => {
