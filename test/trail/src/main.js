@@ -8,7 +8,7 @@ function trailsAnimation() {
     },
   ];
 
-  for (let i = 1; i <= 10; ++i) {
+  for (let i = 1; i <= 20; ++i) {
     const trail = document.body.appendChild(document.createElement(`div`));
 
     trail.style.left = `${(i + 1) * -60}px`;
@@ -33,40 +33,42 @@ function trailsAnimation() {
   );
 
   function trail(event) {
-    const cursorOffsetLeft = event.pageX;
-    const cursorOffsetTop = event.pageY;
+    requestAnimationFrame(() => {
+      const cursorOffsetLeft = event.pageX;
+      const cursorOffsetTop = event.pageY;
 
-    const trailsStateLocal = createLocalState(trailsState);
+      const trailsStateLocal = createLocalState(trailsState);
 
-    for (let i = 1; i < trailsState.length; ++i) {
-      const trail = trailsState[i];
-      const trailPrev = trailsStateLocal[i - 1];
+      for (let i = 1; i < trailsState.length; ++i) {
+        const trail = trailsState[i];
+        const trailPrev = trailsStateLocal[i - 1];
 
-      const x = trailPrev.offsetLeft - trail.offsetLeft;
-      const y = trail.offsetTop - trailPrev.offsetTop;
+        const x = trailPrev.offsetLeft - trail.offsetLeft;
+        const y = trail.offsetTop - trailPrev.offsetTop;
 
-      const angle = calcAngle(x, y);
+        const angle = calcAngle(x, y);
 
-      if (i === 1) {
-        document.body.style.cursor = chooseCursor(angle);
+        if (i === 1) {
+          document.body.style.cursor = chooseCursor(angle);
+        }
+
+        const distance = Math.sqrt(Math.pow(x, 2) + Math.pow(y, 2));
+        if (distance < 40) {
+          break;
+        }
+
+        trail.style.left = trailPrev.offsetLeft + `px`;
+        trail.style.top = trailPrev.offsetTop + `px`;
+
+        trail.style.transform = `rotate(${angle * -1 + Math.PI / 2}rad)`;
+        trail.style.boxShadow = `${x}px ${y}px 12px 0 #16171844`;
       }
 
-      const distance = Math.sqrt(Math.pow(x, 2) + Math.pow(y, 2));
-      if (distance < 40) {
-        break;
-      }
-
-      trail.style.left = trailPrev.offsetLeft + `px`;
-      trail.style.top = trailPrev.offsetTop + `px`;
-
-      trail.style.transform = `rotate(${angle * -1 + Math.PI / 2}rad)`;
-      trail.style.boxShadow = `${x}px ${y}px 12px 0 #16171844`;
-    }
-
-    trailsState[0] = {
-      offsetTop: cursorOffsetTop - 30,
-      offsetLeft: cursorOffsetLeft - 7.5,
-    };
+      trailsState[0] = {
+        offsetTop: cursorOffsetTop - 30,
+        offsetLeft: cursorOffsetLeft - 7.5,
+      };
+    });
   }
 
   function createLocalState(state) {
@@ -86,14 +88,14 @@ function trailsAnimation() {
     if (x > 0 && y >= 0) {
       return Math.atan(y / x);
     }
+    if (x > 0 && y <= 0) {
+      return Math.atan(y / x);
+    }
     if (x < 0 && y >= 0) {
       return Math.atan(y / x) + Math.PI;
     }
     if (x < 0 && y <= 0) {
       return Math.atan(y / x) + Math.PI;
-    }
-    if (x > 0 && y <= 0) {
-      return Math.atan(y / x) + 2 * Math.PI;
     }
 
     if (x === 0) {
