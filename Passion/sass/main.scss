@@ -20,7 +20,7 @@ $main-width: 80rem;
   cursor: pointer;
 }
 @mixin link-animation {
-    &::after {
+  &::after {
     content: "";
     display: block;
     transition: 0.3s;
@@ -128,7 +128,6 @@ html {
     border-right: 2rem solid transparent;
   }
 
-
   .content {
     width: $main-width;
     display: flex;
@@ -195,7 +194,6 @@ html {
         display: flex;
         justify-content: space-between;
         align-items: center;
-
 
         img {
           width: 2rem;
@@ -450,7 +448,7 @@ html {
         background-color: $dark-placeholder;
         width: 23rem;
         height: 23rem;
-        border-radius: 1000px
+        border-radius: 1000px;
       }
       .column-btn {
         @include btn;
@@ -534,9 +532,8 @@ html {
     .video-icon {
       display: block;
       width: 8rem;
-      -webkit-filter: drop-shadow( 2px 2px 8px #6b6b6b );
-      filter: drop-shadow( 2px 2px 8px #6b6b6b );
-
+      -webkit-filter: drop-shadow(2px 2px 8px #6b6b6b);
+      filter: drop-shadow(2px 2px 8px #6b6b6b);
     }
   }
 }
@@ -575,10 +572,8 @@ html {
         border-radius: 2px;
       }
     }
-
   }
 }
-
 
 .website {
   background-color: $dark-bg;
@@ -634,9 +629,8 @@ html {
           display: block;
           border-radius: 50%;
           width: 8rem;
-          -webkit-filter: drop-shadow( 2px 2px 8px #6b6b6b );
-          filter: drop-shadow( 2px 2px 8px #6b6b6b );
-
+          -webkit-filter: drop-shadow(2px 2px 8px #6b6b6b);
+          filter: drop-shadow(2px 2px 8px #6b6b6b);
         }
       }
     }
@@ -765,7 +759,8 @@ html {
       width: 5rem;
       margin: 2.5rem 0;
     }
-    h3, p {
+    h3,
+    p {
       color: $second-text;
     }
     p {
@@ -892,7 +887,7 @@ b {
   font-weight: 700;
 }
 a {
-      letter-spacing: 0;
+  letter-spacing: 0;
 }
 
 /*

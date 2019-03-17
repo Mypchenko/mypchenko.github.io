@@ -1,0 +1,3 @@
+html{background-color:#20232d;cursor:all-scroll;height:200vh;overflow-x:hidden;overflow-y:hidden}.trail{position:absolute;width:15px;height:60px;background-color:#fff;border:1px solid #3b3b3b;border-radius:50%;-webkit-transform:rotate(-45deg);transform:rotate(-45deg)}.trail:last-of-type,.trail:first-of-type{background-color:#beaad4}body{z-index:5;width:100%;height:100%}
+
+/*# sourceMappingURL=main.min.css.map */
