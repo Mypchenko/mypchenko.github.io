@@ -20,6 +20,17 @@ function trailsAnimation() {
   }
 
   window.addEventListener(`mousemove`, trail);
+  window.addEventListener(
+    `touchmove`,
+    (event) => {
+      trail({
+        pageX: event.touches[0].pageX,
+        pageY: event.touches[0].pageY,
+      });
+      event.preventDefault();
+    },
+    { passive: false }
+  );
 
   function trail(event) {
     const cursorOffsetLeft = event.pageX;
