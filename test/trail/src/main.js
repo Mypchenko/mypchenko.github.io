@@ -8,7 +8,7 @@ function trailsAnimation() {
     },
   ];
 
-  for (let i = 1; i <= 20; ++i) {
+  for (let i = 1; i <= 50; ++i) {
     const trail = document.body.appendChild(document.createElement(`div`));
 
     trail.style.left = `${(i + 1) * -60}px`;
