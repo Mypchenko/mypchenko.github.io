@@ -4,7 +4,7 @@
 $dark-bg: #344b61;
 $bright-bg: #f57979;
 $main-text: #262626;
-$second-text: #ffffff;
+$second-text: #fff;
 $dark-text: #808080;
 $placeholder: #f8f8f8;
 $dark-placeholder: #f3f3f3;
@@ -24,14 +24,14 @@ $main-width: 80rem;
     content: "";
     display: block;
     transition: 0.3s;
-    height: 3px;
+    height: 2px;
     margin-top: 2px;
     background: $bright-bg;
     transform: scaleX(0);
   }
 
   &:hover:after {
-    height: 2.5px;
+    height: 2px;
     transform: scaleX(1);
   }
 }
@@ -273,7 +273,7 @@ html {
         .cart-img {
           width: 100%;
           min-height: 15rem;
-          background-color: $dark-placeholder;
+          background-color: $gray-placeholder;
           border-top-left-radius: 0.5rem;
           border-top-right-radius: 0.5rem;
         }
@@ -412,6 +412,11 @@ html {
           margin: 2rem 0;
 
           .testimonial-link {
+            display: inline-block;
+            @include link-animation;
+            &::after {
+              margin-top: 5px;
+            }
             color: $bright-bg;
           }
         }
@@ -427,6 +432,12 @@ html {
   .columns-content {
     width: $main-width;
     margin: 0 auto;
+
+    a {
+      display: inline-block;
+      width: max-content;
+      @include link-animation;
+    }
 
     .columns-divider {
       left: 0;
@@ -823,6 +834,15 @@ footer {
     flex-direction: row;
     justify-content: space-between;
     align-items: flex-end;
+
+    .footer-link {
+      display: inline-block;
+      transition: 0.25s;
+
+      &:hover {
+        text-shadow: 1px 0px $bright-bg;
+      }
+    }
 
     p {
       display: block;
