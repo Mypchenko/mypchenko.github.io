@@ -31,7 +31,6 @@ $main-width: 80rem;
   }
 
   &:hover:after {
-    height: 2px;
     transform: scaleX(1);
   }
 }
@@ -63,6 +62,13 @@ html {
     font-weight: bold;
     font-size: 3.4rem;
 
+    .header-link {
+      @include link-animation;
+      &::after {
+        background: $second-text;
+        height: 1px;
+      }
+    }
     .header-span {
       font-size: 1.5rem;
       font-weight: 300;
