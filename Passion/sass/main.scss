@@ -331,6 +331,16 @@ html {
       padding: 6rem 0;
       display: flex;
 
+      .concept-img {
+        margin-top: 7px;
+        display: block;
+        min-width: 350px;
+        min-height: 300px;
+        width: 350px;
+        height: 300px;
+        background-color: $placeholder;
+      }
+
       .concept-text {
         p {
           margin: 3rem 0;
