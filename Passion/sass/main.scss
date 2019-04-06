@@ -1,5 +1,5 @@
-@import url('https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700');
-@import url('https://fonts.googleapis.com/css?family=Muli:300,400,700');
+@import 'https://fonts.googleapis.com/css?family=Open+Sans:300, 400, 600, 700';
+@import 'https://fonts.googleapis.com/css?family=Muli:300, 400, 700';
 
 $dark-bg: #344b61;
 $bright-bg: #f57979;
@@ -16,8 +16,15 @@ $main-width: 80rem;
   border-radius: 1000px;
   height: 5rem;
   width: 18.2rem;
-  outline: none;
   cursor: pointer;
+  outline: none;
+  transition: 0.2;
+
+  &:focus {
+    box-shadow: 0 3px 6px 0 rgb(39, 39, 39);
+    position: relative;
+    top: -2px;
+  }
 }
 @mixin link-animation {
   &::after {
@@ -34,7 +41,6 @@ $main-width: 80rem;
     transform: scaleX(1);
   }
 }
-
 html {
   font-family: 'Open Sans', sans-serif;
   font-size: 16px;
@@ -186,7 +192,7 @@ html {
       display: block;
       width: 100%;
       min-height: 30rem;
-      background: $placeholder;
+      background: $gray-placeholder;
     }
 
     .blog-heading {
@@ -273,12 +279,11 @@ html {
 
       .cart {
         background-color: $second-text;
-        width: 30%;
+        flex-basis: 31%;
         border-radius: 0.5rem;
 
         .cart-img {
           width: 100%;
-          min-height: 15rem;
           background-color: $gray-placeholder;
           border-top-left-radius: 0.5rem;
           border-top-right-radius: 0.5rem;
@@ -330,18 +335,23 @@ html {
       width: 100%;
       padding: 6rem 0;
       display: flex;
+      flex-direction: row;
+      justify-content: space-between;
+
+      &:last-of-type {
+        flex-direction: row-reverse;
+      }
 
       .concept-img {
-        margin-top: 7px;
         display: block;
-        min-width: 350px;
-        min-height: 300px;
-        width: 350px;
-        height: 300px;
-        background-color: $placeholder;
+        width: 30%;
+        margin: 0 0 auto 0;
+        border-radius: 0.4rem;
+        background-color: $dark-placeholder;
       }
 
       .concept-text {
+        width: 62%;
         p {
           margin: 3rem 0;
         }
@@ -352,24 +362,6 @@ html {
           color: $second-text;
           font-size: 2.2rem;
         }
-      }
-
-      img {
-        display: block;
-        min-width: 20rem;
-        min-height: 20rem;
-        max-width: 20rem;
-        max-height: 20rem;
-        margin-top: 1rem;
-        background-color: $dark-placeholder;
-      }
-
-      &:first-child .concept-text {
-        padding-left: 5rem;
-      }
-
-      &:last-child .concept-text {
-        padding-right: 5rem;
       }
     }
   }
@@ -419,7 +411,7 @@ html {
           border-radius: 1000px;
           width: 10rem;
           height: 10rem;
-          background: $dark-placeholder;
+          background: $gray-placeholder;
           margin: 0 auto 3rem auto;
         }
         .testimonial-footer {
@@ -464,7 +456,6 @@ html {
     }
 
     .first-block {
-      padding: 0 2rem;
       width: 100%;
       height: max-content;
       display: flex;
@@ -472,7 +463,7 @@ html {
 
       .column-img {
         display: block;
-        background-color: $dark-placeholder;
+        background-color: $gray-placeholder;
         width: 23rem;
         height: 23rem;
         border-radius: 1000px;
@@ -488,7 +479,6 @@ html {
       }
       .block-content {
         width: 50%;
-        padding: 2rem;
         display: flex;
         flex-direction: column;
         justify-content: center;
@@ -510,7 +500,7 @@ html {
         padding: 1rem 0;
       }
       h3 {
-        margin: 4rem 0;
+        margin: 4rem 0 2rem 0;
       }
       p {
         padding-right: 3rem;
@@ -541,7 +531,7 @@ html {
   .video-link {
     display: block;
     color: $bright-bg;
-    width: 14.8rem;
+    width: max-content;
     margin: 0 auto;
     @include link-animation;
   }
@@ -550,7 +540,7 @@ html {
     display: flex;
     justify-content: center;
     align-items: center;
-    background-color: $dark-placeholder;
+    background-color: $gray-placeholder;
     margin: 5rem auto 0 auto;
     width: 48rem;
     height: 27rem;
@@ -594,7 +584,7 @@ html {
 
       .box {
         width: 32.5%;
-        background-color: $dark-placeholder;
+        background-color: $gray-placeholder;
         height: 30rem;
         border-radius: 2px;
       }
@@ -643,7 +633,7 @@ html {
         width: 40rem;
         height: 26rem;
         top: 20.5%;
-        background-color: $dark-placeholder;
+        background-color: $gray-placeholder;
         display: flex;
         justify-content: center;
         align-items: center;
@@ -684,16 +674,17 @@ html {
     .choose-plan {
       display: flex;
       flex-direction: row;
-      justify-content: space-between;
+      flex-wrap: wrap;
+      justify-content: center;
       align-items: center;
 
       .plan {
-        flex-grow: 1;
-        flex-basis: 0;
+        flex-basis: 30%;
         border-radius: 0.35rem;
         margin: 1rem 0.5rem;
         background-color: $dark-placeholder;
         text-align: center;
+        transition: 0.25s;
 
         .plan-header {
           vertical-align: middle;
@@ -748,7 +739,7 @@ html {
           font-size: 1.4rem;
         }
 
-        &-active {
+        &:hover {
           color: $second-text;
           background-color: $dark-bg;
 
@@ -826,7 +817,7 @@ html {
       }
       p {
         color: $second-text;
-        padding-top: 3rem;
+        padding-top: 1rem;
       }
     }
   }
@@ -942,14 +933,257 @@ a {
   }
 }
 
+@media only screen and (max-width: 1150px) {
+  html {
+    font-size: 13px;
+  }
+}
+
+@media only screen and (max-width: 1080px) {
+  html {
+    font-size: 12px;
+  }
+}
+
 @media only screen and (max-width: 1024px) {
   html {
     font-size: 11px;
   }
 }
 
-@media only screen and (max-width: 800px) {
+@media only screen and (max-width: 925px) {
+  html {
+    font-size: 10px;
+  }
+}
+
+@media only screen and (max-width: 835px) {
   html {
     font-size: 9px;
+  }
+}
+
+@media only screen and (max-width: 770px) {
+  html {
+    font-size: 8px;
+  }
+}
+
+@media only screen and (max-width: 680px) {
+  html {
+    font-size: 7px;
+  }
+
+  .gallery .gallery-content .carts {
+    flex-direction: column;
+    .cart {
+      margin: 2rem 0;
+      width: 80%;
+      .cart-footer {
+        img {
+          width: 5rem;
+          margin: 0 1rem;
+        }
+      }
+    }
+  }
+
+  .concepts .concepts-content {
+    .concept:last-of-type,
+    .concept {
+      flex-direction: column;
+      align-items: center;
+
+      .concept-img,
+      .concept-text {
+        width: 80%;
+      }
+
+      .concept-img {
+        margin-bottom: 5rem;
+      }
+    }
+  }
+
+  .testimonials .testimonials-content .testimonial-container {
+    flex-direction: column;
+
+    .testimonial {
+      width: 80%;
+      margin-bottom: 5rem;
+
+      .testimonial-img {
+        width: 20rem;
+        height: 20rem;
+      }
+    }
+
+    .testimonial:last-of-type {
+      margin-bottom: 0;
+    }
+  }
+
+  .columns .columns-content {
+    .first-block {
+      flex-direction: column;
+      justify-content: space-between;
+      align-items: center;
+
+      .block-content {
+        width: 80%;
+        margin-bottom: 5rem;
+
+        .column-img {
+          width: 35rem;
+          height: 35rem;
+        }
+      }
+
+      .block-content:last-of-type {
+        margin-bottom: 0;
+      }
+    }
+
+    .second-block {
+      flex-direction: column;
+      align-items: center;
+
+      .block-content {
+        width: 80%;
+      }
+    }
+  }
+
+  .prices .prices-content .choose-plan .plan {
+    flex-basis: 45%;
+
+    h4 {
+      font-size: 3rem;
+    }
+    li {
+      font-size: 2rem;
+    }
+  }
+
+  .contacts .contacts-content {
+    flex-direction: column;
+    align-items: center;
+
+    .contacts-block {
+      width: 80%;
+    }
+
+    .contacts-block:first-of-type {
+      margin-bottom: 3rem;
+    }
+  }
+}
+
+@media only screen and (max-width: 580px) {
+  html {
+    font-size: 6px;
+  }
+}
+
+@media only screen and (max-width: 500px) {
+  html {
+    font-size: 5.5px;
+  }
+}
+
+@media only screen and (max-width: 450px) {
+  html {
+    font-size: 5px;
+  }
+
+  h1 {
+    font-size: 7rem;
+  }
+  h2 {
+    font-size: 6rem;
+  }
+  h3 {
+    font-size: 4rem;
+  }
+  h4 {
+    font-size: 3.1rem;
+  }
+  h5 {
+    font-size: 3rem;
+  }
+  p {
+    font-size: 2.5rem;
+  }
+  a {
+    font-size: 2rem;
+  }
+
+  .intro .main p {
+    font-size: 2.5rem;
+  }
+
+  .features .content .feature-box .feature-link {
+    margin-top: 0.5rem;
+    font-size: 2.3rem;
+  }
+
+  .gallery .gallery-content .carts .cart .cart-footer .cart-link {
+    font-size: 2.5rem;
+  }
+
+  .testimonial-link {
+    font-size: 3rem;
+  }
+
+  .columns .columns-content .first-block p {
+    line-height: 3rem;
+  }
+
+  .columns .columns-content .second-block {
+    p {
+      line-height: 3rem;
+    }
+
+    a {
+      font-size: 2.5rem;
+    }
+  }
+
+  .video-link {
+    font-size: 2.5rem;
+  }
+
+  .website-link {
+    font-size: 2.5rem;
+  }
+
+  .prices .prices-content {
+    p {
+      margin: 2rem 0;
+    }
+
+    .choose-plan .plan .plan-btn {
+      font-size: 3rem;
+      width: 15rem;
+      height: 4.4rem;
+    }
+  }
+}
+
+@media only screen and (max-width: 405px) {
+  html {
+    font-size: 4.5px;
+  }
+}
+
+@media only screen and (max-width: 370px) {
+  html {
+    font-size: 4px;
+  }
+}
+
+@media only screen and (max-width: 325px) {
+  html {
+    font-size: 3.5px;
   }
 }
