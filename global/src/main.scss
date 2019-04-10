@@ -1,1 +1,16 @@
+.body {
+  margin: 0;
+  width: 100%;
+  min-width: 200px;
+  max-width: 1400px;
+  height: 100%;
+  margin: 0 auto;
+}
 
+.bootstrapGrid {
+  box-sizing: border-box;
+  display: grid;
+  height: 100%;
+  width: 100%;
+  grid-template-columns: repeat(12, 1fr);
+}
