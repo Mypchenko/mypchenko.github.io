@@ -1,23 +1,4 @@
-@font-face {
-  font-family: 'Nunito Sans Black';
-  src: url(/assets/fonts/Nunito_Sans/NunitoSans-Black.ttf) format("truetype");
-}
-@font-face {
-  font-family: 'Montserrat Light';
-  src: url(/assets/fonts/Montserrat/Montserrat-Light.ttf) format("truetype");
-}
-@font-face {
-  font-family: 'Montserrat Regular';
-  src: url(/assets/fonts/Montserrat/Montserrat-Regular.ttf) format("truetype");
-}
-@font-face {
-  font-family: 'Montserrat Bold';
-  src: url(/assets/fonts/Montserrat/Montserrat-Bold.ttf) format("truetype");
-}
-@font-face {
-  font-family: 'Montserrat Black';
-  src: url(/assets/fonts/Montserrat/Montserrat-Black.ttf) format("truetype");
-}
+@import url('https://fonts.googleapis.com/css?family=Montserrat:300,400,700,900|Nunito+Sans:900');
 
 .body {
   margin: 0;
