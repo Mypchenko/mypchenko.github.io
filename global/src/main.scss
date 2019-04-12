@@ -20,9 +20,10 @@ $activeTextColor: #ffffff;
 }
 
 .bootstrapGrid {
-  transform-style: preserve-3d;
+  transform-style: initial;
   box-sizing: border-box;
   display: grid;
+  align-items: start;
   grid-template-columns: repeat(12, 1fr);
   grid-gap: 0 calc(100% / 36);
 }
@@ -36,7 +37,8 @@ $activeTextColor: #ffffff;
 }
 
 .pageContainer {
-  position: absolute;
+  position: fixed;
+  left: 0;
   z-index: 1;
   background-color: $backgroundColor;
   width: 100vw;
@@ -53,17 +55,18 @@ $activeTextColor: #ffffff;
 
 .pageHeader {
   height: max-content;
+  grid-template-rows: auto;
   padding: 1em 0;
   grid-column: 1 / span 12;
   display: grid;
   justify-items: center;
-  align-items: space-between;
+  align-items: center;
 }
 
 .logo {
   grid-column: 1 / span 2;
   display: grid;
-  grid-template-columns: 0.8fr 3fr;
+  grid-template-columns: 2.4em auto;
   justify-self: stretch;
   justify-items: start;
   align-items: center;
@@ -88,7 +91,7 @@ $activeTextColor: #ffffff;
   grid-column: 12 / span 1;
   display: block;
   padding: 10px;
-  margin: auto 0 auto auto;
+  margin-left: auto;
   background: none;
   border: none;
   cursor: pointer;
