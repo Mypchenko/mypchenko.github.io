@@ -8,9 +8,19 @@
   <link rel="stylesheet" href="dist/main.min.css">
 </head>
 <body class="body">
+  <script src="dist/main.min.js"></script>
   <div class="bootstrapGrid container">
-    <div class="pageContainer pageContainer_visible"></div>
-    <nav class="mainMenu visible">
+    <div class="pageContainer bootstrapGrid container">
+      <header class="pageHeader bootstrapGrid">
+        <div class="logo">
+          <img src="dist/img/logo.svg" alt="global logo" class="logoImg">
+          <span class="logoText">GLOBAL</span>
+        </div>
+        <div class="headerBtn"></div>
+        <button class="mainMenuBtn"><img src="dist/img/main-menu.svg" alt="menu icon"></button>
+      </header>
+    </div>
+    <nav class="mainMenu">
       <ul>
         <li class="mainMenu__element mainMenu__element_current">Home</li>
         <li class="mainMenu__element">Works</li>
