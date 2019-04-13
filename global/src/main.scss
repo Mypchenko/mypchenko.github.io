@@ -57,6 +57,13 @@ $activeTextColor: #ffffff;
 .pageContainer_zoomedOut {
   transform: translateZ(-750px) translateX(-22.5%) rotateY(45deg);
 }
+.pageReturnArea {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  z-index: 999999;
+  cursor: pointer;
+}
 
 // --- pageHeader ---
 .pageHeader {
@@ -107,7 +114,7 @@ $activeTextColor: #ffffff;
   font-size: 55px;
   transition: 0.5s;
 }
-.mainMenu__element {
+.mainMenuElement {
   width: max-content;
   font-family: "Montserrat", sans-serif;
   font-weight: 900;
@@ -117,8 +124,12 @@ $activeTextColor: #ffffff;
   height: 1.5em;
   cursor: pointer;
   margin-left: auto;
+  transition-duration: 0.4s;
+  transition-timing-function: cubic-bezier(0.19, 1, 0.22, 1);
+  transform: translateX(300%) translateY(300%);
+  opacity: 0;
 }
-.mainMenu__element_current {
+.mainMenuElement_current {
   position: relative;
   top: -0.275em;
 
@@ -133,9 +144,14 @@ $activeTextColor: #ffffff;
     background-color: $accentColor;
   }
 }
+.mainMenuElement_appear {
+  transform: translateX(0) translateY(0);
+  opacity: 1;
+}
 
 // --- mainMenuBtn ---
 .mainMenuBtn {
+  outline: none;
   grid-column: 12 / span 1;
   display: block;
   padding: 10px;
