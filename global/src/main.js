@@ -23,7 +23,7 @@ document.body.onload = () => {
       mainMenuElements[i].style.transitionDelay = `${i * transitionDelayCf}s`;
     }
 
-    mainMenuElements.forEach((element) => {
+    mainMenuElements.map((element) => {
       element.classList.toggle(`mainMenuElement_appear`);
     });
 
