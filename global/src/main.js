@@ -15,12 +15,14 @@ document.body.onload = () => {
 
   function mainMenuViewToggle(e) {
     page.classList.toggle(`pageContainer_zoomedOut`);
-    pageReturnArea.classList.toggle(`inactive`);
+    const isEvenAnimation = pageReturnArea.classList.toggle(`inactive`);
 
-    const transitionDelayCf = e.target.nodeName !== `DIV` ? 0.05 : 0;
+    const transitionDelayCf = isEvenAnimation ? 0.02 : 0.05;
 
     for (let i = 0; i < mainMenuElements.length; ++i) {
-      mainMenuElements[i].style.transitionDelay = `${i * transitionDelayCf}s`;
+      mainMenuElements[i].style.transitionDelay = `${(isEvenAnimation
+        ? mainMenuElements.length - i - 1
+        : i) * transitionDelayCf}s`;
     }
 
     mainMenuElements.map((element) => {
