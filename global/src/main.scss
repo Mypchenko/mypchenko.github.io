@@ -19,6 +19,15 @@ $activeTextColor: #ffffff;
   perspective: 1000px;
 }
 
+
+// --- Utility ---
+.inactive {
+  display: none;
+}
+
+// --- Generic ---
+.button {
+}
 .bootstrapGrid {
   transform-style: initial;
   box-sizing: border-box;
@@ -27,15 +36,11 @@ $activeTextColor: #ffffff;
   grid-template-columns: repeat(12, 1fr);
   grid-gap: 0 calc(100% / 36);
 }
-
-.container {
+.bootstrapGridContainer {
   padding: 0 calc(100% / 36 / 2);
 }
 
-.button {
-
-}
-
+// --- pageContainer ---
 .pageContainer {
   position: fixed;
   left: 0;
@@ -53,6 +58,7 @@ $activeTextColor: #ffffff;
   transform: translateZ(-750px) translateX(-22.5%) rotateY(45deg);
 }
 
+// --- pageHeader ---
 .pageHeader {
   height: max-content;
   grid-template-rows: auto;
@@ -63,6 +69,12 @@ $activeTextColor: #ffffff;
   align-items: center;
 }
 
+// --- headerBtn ---
+.headerBtn {
+
+}
+
+// --- logo* ---
 .logo {
   grid-column: 1 / span 2;
   display: grid;
@@ -83,20 +95,8 @@ $activeTextColor: #ffffff;
   font-size: 1em;
 }
 
-.headerBtn {
 
-}
-
-.mainMenuBtn {
-  grid-column: 12 / span 1;
-  display: block;
-  padding: 10px;
-  margin-left: auto;
-  background: none;
-  border: none;
-  cursor: pointer;
-}
-
+// --- mainMenu ---
 .mainMenu {
   grid-column: 8 / span 3;
   grid-row: 1 / span 1;
@@ -107,7 +107,6 @@ $activeTextColor: #ffffff;
   font-size: 55px;
   transition: 0.5s;
 }
-
 .mainMenu__element {
   width: max-content;
   font-family: "Montserrat", sans-serif;
@@ -119,7 +118,6 @@ $activeTextColor: #ffffff;
   cursor: pointer;
   margin-left: auto;
 }
-
 .mainMenu__element_current {
   position: relative;
   top: -0.275em;
@@ -136,6 +134,13 @@ $activeTextColor: #ffffff;
   }
 }
 
-.visible {
-  opacity: 1;
+// --- mainMenuBtn ---
+.mainMenuBtn {
+  grid-column: 12 / span 1;
+  display: block;
+  padding: 10px;
+  margin-left: auto;
+  background: none;
+  border: none;
+  cursor: pointer;
 }
