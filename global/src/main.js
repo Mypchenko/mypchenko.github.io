@@ -17,10 +17,12 @@ document.body.onload = () => {
     page.classList.toggle(`pageContainer_zoomedOut`);
     pageReturnArea.classList.toggle(`inactive`);
 
-    const transitionDelayCf = ~e.path.indexOf(mainMenuBtn) ? 0.05 : 0;
+    const transitionDelayCf = e.target.nodeName !== `DIV` ? 0.05 : 0;
+
     for (let i = 0; i < mainMenuElements.length; ++i) {
       mainMenuElements[i].style.transitionDelay = `${i * transitionDelayCf}s`;
     }
+
     mainMenuElements.forEach((element) => {
       element.classList.toggle(`mainMenuElement_appear`);
     });
