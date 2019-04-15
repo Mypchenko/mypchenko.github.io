@@ -26,7 +26,17 @@ $activeTextColor: #ffffff;
 }
 
 // --- Generic ---
-.button {
+.globalBtn {
+  padding: 0.5em;
+  background-color: $accentColor;
+  text-transform: uppercase;
+  color: $activeTextColor;
+  outline: none;
+  border: none;
+  cursor: pointer;
+  font-family: 'Montserrat';
+  font-weight: 700;
+  width: max-content;
 }
 .bootstrapGrid {
   transform-style: initial;
@@ -78,7 +88,11 @@ $activeTextColor: #ffffff;
 
 // --- headerBtn ---
 .headerBtn {
-
+  font-size: 14px;
+  letter-spacing: 0.08em;
+  width: 6.43em;
+  height: 2.22em;
+  grid-column: 6 / span 2;
 }
 
 // --- logo* ---
@@ -152,8 +166,8 @@ $activeTextColor: #ffffff;
 // --- mainMenuBtn ---
 .mainMenuBtn {
   outline: none;
-  grid-column: 12 / span 1;
   display: block;
+  grid-column: 12 / span 1;
   padding: 10px;
   margin-left: auto;
   background: none;
