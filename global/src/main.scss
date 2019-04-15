@@ -183,11 +183,10 @@ $sectionNavSideColor: #1b1b1b;
 
 // --- sectionNavLinePoints ---
 .sectionNavLinePointsContainer {
-  display: flex;
+  display: grid;
   width: 0;
   height: 100%;
-  flex-direction: column;
-  justify-content: space-around;
+  align-content: space-evenly;
 }
 .sectionNavLinePoint {
   position: relative;
@@ -204,4 +203,11 @@ $sectionNavSideColor: #1b1b1b;
 .sectionNavLinePoint_selected {
   background-color: $accentColor;
   transition: 0.5s ease;
+}
+
+// --- sectionsContainer ---
+.sectionsContainer {
+  grid-column: 3 / span 10;
+  grid-row: 2 / span 1;
+  align-self: stretch;
 }
