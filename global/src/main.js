@@ -5,7 +5,10 @@ document.body.onload = () => {
     document.getElementsByClassName(`mainMenuElement`)
   );
   const pageReturnArea = document.getElementsByClassName(`pageReturnArea`)[0];
+  const sections = document.getElementsByClassName(`sectionsContainer`)[0]
+    .children;
 
+  // --- main menu ---
   for (let i = 0; i < mainMenuElements.length; ++i) {
     mainMenuElements[i].style.transitionDelay = `${i * 0.05}s`;
   }
@@ -14,15 +17,15 @@ document.body.onload = () => {
   mainMenuBtn.addEventListener(`click`, mainMenuViewToggle);
 
   function mainMenuViewToggle(e) {
-    page.classList.toggle(`pageContainer_zoomedOut`);
-    const isEvenAnimation = pageReturnArea.classList.toggle(`inactive`);
+    const isOpeningAnimation = page.classList.toggle(`pageContainer_zoomedOut`);
+    pageReturnArea.classList.toggle(`inactive`);
 
-    const transitionDelayCf = isEvenAnimation ? 0.02 : 0.05;
+    const transitionDelayCf = isOpeningAnimation ? 0.05 : 0.02;
 
     for (let i = 0; i < mainMenuElements.length; ++i) {
-      mainMenuElements[i].style.transitionDelay = `${(isEvenAnimation
-        ? mainMenuElements.length - i - 1
-        : i) * transitionDelayCf}s`;
+      mainMenuElements[i].style.transitionDelay = `${(isOpeningAnimation
+        ? i
+        : mainMenuElements.length - i - 1) * transitionDelayCf}s`;
     }
 
     mainMenuElements.map((element) => {
@@ -30,5 +33,28 @@ document.body.onload = () => {
     });
 
     e.stopPropagation;
+  }
+
+  // --- section nav ---
+  //    --- section line points ---
+
+  const linePointsContainer = document.getElementsByClassName(
+    `sectionNavLinePointsContainer`
+  )[0];
+  const linePoint = document.createElement(`DIV`);
+  linePoint.classList.add(`sectionNavLinePoint`);
+  const linePointActive = document.createElement(`DIV`);
+  linePointActive.classList.add(
+    `sectionNavLinePoint`,
+    `sectionNavLinePoint_active`
+  );
+
+  for (let i = 0; i < sections.length; ++i) {
+    linePointsContainer.appendChild(linePointActive.cloneNode());
+    if (i < sections.length - 1) {
+      for (let i = 0; i < 3; ++i) {
+        linePointsContainer.appendChild(linePoint.cloneNode());
+      }
+    }
   }
 };
