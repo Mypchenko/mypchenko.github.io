@@ -5,6 +5,8 @@ $accentColor: #0f33ff;
 $activeTextColor: #ffffff;
 $sectionNavSideColor: #1b1b1b;
 
+$transition: cubic-bezier(.46,.03,.52,.96);
+
 .html {
   background-color: $backgroundColor;
   font-size: 16px;
@@ -55,7 +57,6 @@ $sectionNavSideColor: #1b1b1b;
   align-items: center;
   justify-items: end;
   font-size: 55px;
-  transition: 0.5s;
 }
 .mainMenuElement {
   width: max-content;
@@ -68,7 +69,7 @@ $sectionNavSideColor: #1b1b1b;
   cursor: pointer;
   margin-left: auto;
   transition-duration: 0.4s;
-  transition-timing-function: cubic-bezier(0.19, 1, 0.22, 1);
+  transition-timing-function: $transition;
   transform: translateX(300%) translateY(300%);
   opacity: 0;
 }
@@ -112,7 +113,7 @@ $sectionNavSideColor: #1b1b1b;
   background-color: $backgroundColor;
   width: 100vw;
   height: 100vh;
-  transition: transform 0.4s;
+  transition: transform 0.4s $transition;
   outline: $accentColor solid 2em;
   transform-origin: center left;
   padding: 2vh 6vw 4vh 6vw;
@@ -206,7 +207,7 @@ $sectionNavSideColor: #1b1b1b;
 }
 .sectionNavLinePoint_selected {
   background-color: $accentColor;
-  transition: 0.4s ease;
+  transition: 0.4s $transition;
 }
 
 // --- sectionName ---
@@ -218,7 +219,7 @@ $sectionNavSideColor: #1b1b1b;
   font-size: 1em;
   display: grid;
   grid-template-columns: 2em 2.5em auto;
-  transition: 0.4s ease;
+  transition: 0.4s $transition;
   transform: translateX(1.25em)
 }
 .sectionName__number {
@@ -240,6 +241,7 @@ $sectionNavSideColor: #1b1b1b;
 }
 // --- sectionsContainer ---
 .sectionsContainer {
+  position: relative;
   grid-column: 3 / span 10;
   grid-row: 2 / span 1;
   align-self: stretch;
