@@ -1,12 +1,19 @@
 document.body.onload = () => {
+  const pageSection = {
+    previous: 0,
+    current: 0,
+  };
+
   const page = document.getElementsByClassName(`pageContainer`)[0];
   const mainMenuBtn = document.getElementsByClassName(`mainMenuBtn`)[0];
   const mainMenuElements = Array.from(
     document.getElementsByClassName(`mainMenuElement`)
   );
   const pageReturnArea = document.getElementsByClassName(`pageReturnArea`)[0];
-  const sections = document.getElementsByClassName(`sectionsContainer`)[0]
-    .children;
+  const sectionsContainer = document.getElementsByClassName(
+    `sectionsContainer`
+  )[0];
+  const sections = sectionsContainer.children;
 
   // --- main menu ---
   for (let i = 0; i < mainMenuElements.length; ++i) {
@@ -51,8 +58,6 @@ document.body.onload = () => {
 
   sectionNavLinePointContainer.appendChild(sectionNavLinePoint.cloneNode());
 
-  console.log(sectionNavLinePointContainer);
-
   for (let i = 0; i < sections.length; ++i) {
     const sectionNavLinePointContainerCopy = sectionNavLinePointContainer.cloneNode(
       { deep: true }
@@ -87,6 +92,19 @@ document.body.onload = () => {
       }
     }
   }
+
+  // TODO --- scrolling events ---
+  sectionsContainer.addEventListener(`wheel`, (event) => {
+    if (event.deltaY < 0) {
+      scrollPageSections(`prev`);
+    } else if (event.deltaY > 0) {
+      scrollPageSections(`next`);
+    }
+
+    event.preventDefault;
+  });
+
+  // --- functions ---
 
   function crtElementWithClasses(element, ...classes) {
     const local = document.createElement(element);
