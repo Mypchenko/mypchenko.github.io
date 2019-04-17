@@ -36,25 +36,77 @@ document.body.onload = () => {
   }
 
   // --- section nav ---
-  //    --- section line points ---
-
-  const linePointsContainer = document.getElementsByClassName(
-    `sectionNavLinePointsContainer`
+  const sectionNavContainer = document.getElementsByClassName(
+    `sectionNavContainer`
   )[0];
-  const linePoint = document.createElement(`DIV`);
-  linePoint.classList.add(`sectionNavLinePoint`);
-  const linePointActive = document.createElement(`DIV`);
-  linePointActive.classList.add(
-    `sectionNavLinePoint`,
-    `sectionNavLinePoint_active`
+  const sectionNavLinePointContainer = crtElementWithClasses(
+    `div`,
+    `sectionNavLinePointContainer`
   );
 
+  const sectionNavLinePoint = crtElementWithClasses(
+    `div`,
+    `sectionNavLinePoint`
+  );
+
+  sectionNavLinePointContainer.appendChild(sectionNavLinePoint.cloneNode());
+
+  console.log(sectionNavLinePointContainer);
+
   for (let i = 0; i < sections.length; ++i) {
-    linePointsContainer.appendChild(linePointActive.cloneNode());
+    const sectionNavLinePointContainerCopy = sectionNavLinePointContainer.cloneNode(
+      { deep: true }
+    );
+
+    sectionNavLinePointContainerCopy.firstChild.classList.add(
+      `sectionNavLinePoint_active`
+    );
+    sectionNavLinePointContainerCopy.classList.add(
+      `sectionNavLinePointContainer_active`
+    );
+
+    const sectionName = crtElementWithClasses(`div`, `sectionName`);
+
+    const numberSpan = crtElementWithClasses(`span`, `sectionName__number`);
+    numberSpan.textContent = toTwoDigits(i + 1);
+
+    const nameSpan = crtElementWithClasses(`span`, `sectionName__name`);
+    nameSpan.textContent = sections[i].dataset.name;
+
+    sectionName.appendChild(numberSpan);
+    sectionName.appendChild(nameSpan);
+
+    sectionNavLinePointContainerCopy.appendChild(sectionName);
+    sectionNavContainer.appendChild(sectionNavLinePointContainerCopy);
+
     if (i < sections.length - 1) {
       for (let i = 0; i < 3; ++i) {
-        linePointsContainer.appendChild(linePoint.cloneNode());
+        sectionNavContainer.appendChild(
+          sectionNavLinePointContainer.cloneNode({ deep: true })
+        );
       }
     }
+  }
+
+  function crtElementWithClasses(element, ...classes) {
+    const local = document.createElement(element);
+
+    if (classes.length > 0) {
+      for (let i = 0; i < classes.length; ++i) {
+        local.classList.add(classes[i]);
+      }
+    }
+
+    return local;
+  }
+
+  function toTwoDigits(num) {
+    let str = String(num);
+
+    while (str.length < 2) {
+      str = `0` + str;
+    }
+
+    return str;
   }
 };

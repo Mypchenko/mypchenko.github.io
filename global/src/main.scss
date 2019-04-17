@@ -19,7 +19,6 @@ $sectionNavSideColor: #1b1b1b;
   perspective: 1000px;
 }
 
-
 // --- Utility ---
 .inactive {
   display: none;
@@ -171,19 +170,27 @@ $sectionNavSideColor: #1b1b1b;
 
 // --- sectionNavContainer ---
 .sectionNavContainer {
+  position: relative;
   grid-row: 2 / span 1;
-  grid-column: 1 / span 1;
+  grid-column: 1 / span 2;
   justify-self: stretch;
   align-self: stretch;
   border-left: 2px solid $sectionNavSideColor;
+  display: grid;
+  align-content: space-evenly;
 }
 
 // --- sectionNavLinePoints ---
-.sectionNavLinePointsContainer {
+.sectionNavLinePointContainer {
+  position: relative;
+  font-size: 14px;
   display: grid;
-  width: 0;
-  height: 100%;
-  align-content: space-evenly;
+  width: 100%;
+  height: 4px;
+  grid-template-columns: max-content max-content;
+}
+.sectionNavLinePointContainer_active {
+  top: -0.5em;
 }
 .sectionNavLinePoint {
   position: relative;
@@ -199,9 +206,38 @@ $sectionNavSideColor: #1b1b1b;
 }
 .sectionNavLinePoint_selected {
   background-color: $accentColor;
-  transition: 0.5s ease;
+  transition: 0.4s ease;
 }
 
+// --- sectionName ---
+.sectionName {
+  font-weight: 300;
+  font-family: 'Montserrat', sans-serif;
+  color: darken($activeTextColor, 50%);
+  letter-spacing: 0.05em;
+  font-size: 1em;
+  display: grid;
+  grid-template-columns: 2em 2.5em auto;
+  transition: 0.4s ease;
+  transform: translateX(1.25em)
+}
+.sectionName__number {
+  grid-column: 1 / span 1;
+}
+.sectionName__name {
+  grid-column: 3 / span 1;
+  visibility: hidden;
+  opacity: 0;
+}
+.sectionName_nameShown {
+  color: $activeTextColor;
+  transform: translateX(-3.25em);
+
+  .sectionName__name {
+    visibility: visible;
+    opacity: 1;
+  }
+}
 // --- sectionsContainer ---
 .sectionsContainer {
   grid-column: 3 / span 10;
