@@ -71,9 +71,9 @@ document.body.onload = () => {
 
   // TODO --- scrolling events ---
   page.addEventListener(`wheel`, (event) => {
-    // if (event.target.classList.contains(`pageReturnArea`)) {
-    //   return;
-    // }
+    if (event.target.classList.contains(`pageReturnArea`)) {
+      return;
+    }
 
     if (event.deltaY < 0) {
       const pageId = formatId(pageSection.current + 1);
