@@ -18,25 +18,6 @@ document.body.onload = () => {
   pageReturnArea.addEventListener(`click`, mainMenuViewToggle);
   mainMenuBtn.addEventListener(`click`, mainMenuViewToggle);
 
-  function mainMenuViewToggle(e) {
-    const isOpeningAnimation = page.classList.toggle(`pageContainer_zoomedOut`);
-    pageReturnArea.classList.toggle(`inactive`);
-
-    const transitionDelayCf = isOpeningAnimation ? 0.05 : 0.02;
-
-    for (let i = 0; i < mainMenuElements.length; ++i) {
-      mainMenuElements[i].style.transitionDelay = `${(isOpeningAnimation
-        ? i
-        : mainMenuElements.length - i - 1) * transitionDelayCf}s`;
-    }
-
-    mainMenuElements.map((element) => {
-      element.classList.toggle(`mainMenuElement_appear`);
-    });
-
-    e.stopPropagation;
-  }
-
   // --- section nav ---
   const sectionNavContainer = document.getElementsByClassName(
     `sectionNavContainer`
@@ -89,14 +70,16 @@ document.body.onload = () => {
   }
 
   // TODO --- scrolling events ---
-  sectionsContainer.addEventListener(`wheel`, (event) => {
-    if (event.deltaY < 0) {
-      const pageId = formatId(pageSection.current + 1, sections);
+  page.addEventListener(`wheel`, (event) => {
+    // if (event.target.classList.contains(`pageReturnArea`)) {
+    //   return;
+    // }
 
+    if (event.deltaY < 0) {
+      const pageId = formatId(pageSection.current + 1);
       scrollToPage(pageId);
     } else if (event.deltaY > 0) {
-      const pageId = formatId(pageSection.current - +1, sections);
-
+      const pageId = formatId(pageSection.current - +1);
       scrollToPage(pageId);
     }
 
@@ -105,7 +88,7 @@ document.body.onload = () => {
 
   // --- start section ---
   const pageSection = {
-    previous: sections.length - 2,
+    previous: sections.length - 1,
     current: sections.length - 1,
   };
   let busy = false;
@@ -117,8 +100,12 @@ document.body.onload = () => {
     if (!busy) {
       busy = true;
 
-      deactivatePage(pageSection.current);
-      activatePage(id);
+      const animationIsUpwards =
+        pageSection.current - id === 1 ||
+        (id === sections.length - 1 && pageSection.current === 0);
+
+      deactivatePage(pageSection.current, animationIsUpwards);
+      activatePage(id, animationIsUpwards);
 
       pageSection.previous = pageSection.current;
       pageSection.current = id;
@@ -130,7 +117,7 @@ document.body.onload = () => {
     busy = true;
   }
 
-  function activatePage(id) {
+  function activatePage(id, animationIsUpwards) {
     const page = sections[id];
     const mainMenuEntry = mainMenuElements[id];
     const sectionNavLPContainer = Array.from(
@@ -147,7 +134,7 @@ document.body.onload = () => {
     mainMenuEntry.classList.add(`mainMenuElement_current`);
   }
 
-  function deactivatePage(id) {
+  function deactivatePage(id, animationIsUpwards) {
     const page = sections[id];
     const mainMenuEntry = mainMenuElements[id];
     const sectionNavLPContainer = Array.from(
@@ -164,11 +151,11 @@ document.body.onload = () => {
     mainMenuEntry.classList.remove(`mainMenuElement_current`);
   }
 
-  function formatId(id, arr) {
-    if (id >= arr.length) {
+  function formatId(id) {
+    if (id >= sections.length) {
       return 0;
     } else if (id < 0) {
-      return arr.length - 1;
+      return sections.length - 1;
     }
 
     return id;
@@ -194,5 +181,24 @@ document.body.onload = () => {
     }
 
     return str;
+  }
+
+  function mainMenuViewToggle(e) {
+    const isOpeningAnimation = page.classList.toggle(`pageContainer_zoomedOut`);
+    pageReturnArea.classList.toggle(`inactive`);
+
+    const transitionDelayCf = isOpeningAnimation ? 0.05 : 0.02;
+
+    for (let i = 0; i < mainMenuElements.length; ++i) {
+      mainMenuElements[i].style.transitionDelay = `${(isOpeningAnimation
+        ? i
+        : mainMenuElements.length - i - 1) * transitionDelayCf}s`;
+    }
+
+    mainMenuElements.map((element) => {
+      element.classList.toggle(`mainMenuElement_appear`);
+    });
+
+    e.stopPropagation;
   }
 };
