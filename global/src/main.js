@@ -76,10 +76,10 @@ document.body.onload = () => {
     }
 
     if (event.deltaY < 0) {
-      const pageId = formatId(pageSection.current + 1);
+      const pageId = formatId(pageSection.current - 1);
       scrollToPage(pageId);
     } else if (event.deltaY > 0) {
-      const pageId = formatId(pageSection.current - +1);
+      const pageId = formatId(pageSection.current + 1);
       scrollToPage(pageId);
     }
 
