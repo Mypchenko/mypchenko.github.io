@@ -60,6 +60,8 @@ $transition: 0.4s cubic-bezier(.46,.03,.52,.96);
   font-size: 55px;
 }
 .mainMenuElement {
+  position: relative;
+  top: 0.275em;
   width: max-content;
   font-family: "Montserrat", sans-serif;
   font-weight: 900;
@@ -72,20 +74,24 @@ $transition: 0.4s cubic-bezier(.46,.03,.52,.96);
   transition: $transition;
   transform: translateX(300%) translateY(300%);
   opacity: 0;
-}
-.mainMenuElement_current {
-  position: relative;
-  top: -0.275em;
 
   &:before {
+    transition: $transition;
     content: '';
     display: block;
-    position: relative;
-    top: 0.85em;
-    left: -12.5%;
+    position: absolute;
+    top: 0.55em;
+    right: -75%;
+    transform: scaleX(0);
     width: 125%;
     height: 0.275em;
     background-color: $accentColor;
+  }
+}
+.mainMenuElement_current {
+  &:before {
+    transform: scaleX(1);
+    right: -12.5%;
   }
 }
 .mainMenuElement_appear {
