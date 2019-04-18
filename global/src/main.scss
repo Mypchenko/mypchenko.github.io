@@ -5,7 +5,8 @@ $accentColor: #0f33ff;
 $activeTextColor: #ffffff;
 $sectionNavSideColor: #1b1b1b;
 
-$transitionTimeFunc: cubic-bezier(.46,.03,.52,.96);
+
+$transition: 0.4s cubic-bezier(.46,.03,.52,.96);
 
 .html {
   background-color: $backgroundColor;
@@ -68,8 +69,7 @@ $transitionTimeFunc: cubic-bezier(.46,.03,.52,.96);
   height: 1.5em;
   cursor: pointer;
   margin-left: auto;
-  transition-duration: 0.4s;
-  transition-timing-function: $transitionTimeFunc;
+  transition: $transition;
   transform: translateX(300%) translateY(300%);
   opacity: 0;
 }
@@ -113,7 +113,7 @@ $transitionTimeFunc: cubic-bezier(.46,.03,.52,.96);
   background-color: $backgroundColor;
   width: 100vw;
   height: 100vh;
-  transition: transform 0.4s $transitionTimeFunc;
+  transition: $transition;
   outline: $accentColor solid 2em;
   transform-origin: center left;
   padding: 2vh 6vw 4vh 6vw;
@@ -204,10 +204,10 @@ $transitionTimeFunc: cubic-bezier(.46,.03,.52,.96);
 }
 .sectionNavLinePoint_active {
   background-color: #fff;
+  transition: $transition;
 }
 .sectionNavLinePoint_selected {
   background-color: $accentColor;
-  transition: 0.4s $transitionTimeFunc;
 }
 
 // --- sectionName ---
@@ -219,7 +219,7 @@ $transitionTimeFunc: cubic-bezier(.46,.03,.52,.96);
   font-size: 1em;
   display: grid;
   grid-template-columns: 2em 2.5em auto;
-  transition: 0.4s $transitionTimeFunc;
+  transition: $transition;
   transform: translateX(1.25em)
 }
 .sectionName__number {
@@ -228,6 +228,7 @@ $transitionTimeFunc: cubic-bezier(.46,.03,.52,.96);
 .sectionName__name {
   grid-column: 3 / span 1;
   visibility: hidden;
+  transition: $transition;
   opacity: 0;
 }
 .sectionName_nameShown {
@@ -254,7 +255,7 @@ $transitionTimeFunc: cubic-bezier(.46,.03,.52,.96);
   position: absolute;
   visibility: hidden;
   opacity: 0;
-  transition: 0.4s $transitionTimeFunc;
+  transition: $transition;
 }
 .pageSection_active {
   visibility: visible;

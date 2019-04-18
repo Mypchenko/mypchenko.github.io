@@ -1,9 +1,4 @@
 document.body.onload = () => {
-  const pageSection = {
-    previous: 0,
-    current: 0,
-  };
-
   const page = document.getElementsByClassName(`pageContainer`)[0];
   const mainMenuBtn = document.getElementsByClassName(`mainMenuBtn`)[0];
   const mainMenuElements = Array.from(
@@ -96,15 +91,88 @@ document.body.onload = () => {
   // TODO --- scrolling events ---
   sectionsContainer.addEventListener(`wheel`, (event) => {
     if (event.deltaY < 0) {
-      scrollPageSections(`prev`);
+      const pageId = formatId(pageSection.current + 1, sections);
+
+      scrollToPage(pageId);
     } else if (event.deltaY > 0) {
-      scrollPageSections(`next`);
+      const pageId = formatId(pageSection.current - +1, sections);
+
+      scrollToPage(pageId);
     }
 
     event.preventDefault;
   });
 
+  // --- start section ---
+  const pageSection = {
+    previous: sections.length - 2,
+    current: sections.length - 1,
+  };
+  let busy = false;
+  scrollToPage(0);
+
   // --- functions ---
+
+  function scrollToPage(id) {
+    if (!busy) {
+      busy = true;
+
+      deactivatePage(pageSection.current);
+      activatePage(id);
+
+      pageSection.previous = pageSection.current;
+      pageSection.current = id;
+
+      setTimeout(() => {
+        busy = false;
+      }, 500);
+    }
+    busy = true;
+  }
+
+  function activatePage(id) {
+    const page = sections[id];
+    const mainMenuEntry = mainMenuElements[id];
+    const sectionNavLPContainer = Array.from(
+      sectionNavContainer.children
+    ).filter((val) => {
+      return val.classList.contains(`sectionNavLinePointContainer_active`);
+    })[id];
+
+    sectionNavLPContainer.firstChild.classList.add(
+      `sectionNavLinePoint_selected`
+    );
+    sectionNavLPContainer.lastChild.classList.add(`sectionName_nameShown`);
+
+    mainMenuEntry.classList.add(`mainMenuElement_current`);
+  }
+
+  function deactivatePage(id) {
+    const page = sections[id];
+    const mainMenuEntry = mainMenuElements[id];
+    const sectionNavLPContainer = Array.from(
+      sectionNavContainer.children
+    ).filter((val) => {
+      return val.classList.contains(`sectionNavLinePointContainer_active`);
+    })[id];
+
+    sectionNavLPContainer.firstChild.classList.remove(
+      `sectionNavLinePoint_selected`
+    );
+    sectionNavLPContainer.lastChild.classList.remove(`sectionName_nameShown`);
+
+    mainMenuEntry.classList.remove(`mainMenuElement_current`);
+  }
+
+  function formatId(id, arr) {
+    if (id >= arr.length) {
+      return 0;
+    } else if (id < 0) {
+      return arr.length - 1;
+    }
+
+    return id;
+  }
 
   function crtElementWithClasses(element, ...classes) {
     const local = document.createElement(element);
