@@ -22,12 +22,12 @@ document.body.onload = () => {
   const sectionNavContainer = document.getElementsByClassName(
     `sectionNavContainer`
   )[0];
-  const sectionNavLinePointContainer = crtElementWithClasses(
+  const sectionNavLinePointContainer = createElementWithClasses(
     `div`,
     `sectionNavLinePointContainer`
   );
 
-  const sectionNavLinePoint = crtElementWithClasses(
+  const sectionNavLinePoint = createElementWithClasses(
     `div`,
     `sectionNavLinePoint`
   );
@@ -46,12 +46,12 @@ document.body.onload = () => {
       `sectionNavLinePointContainer_active`
     );
 
-    const sectionName = crtElementWithClasses(`div`, `sectionName`);
+    const sectionName = createElementWithClasses(`div`, `sectionName`);
 
-    const numberSpan = crtElementWithClasses(`span`, `sectionName__number`);
+    const numberSpan = createElementWithClasses(`span`, `sectionName__number`);
     numberSpan.textContent = toTwoDigits(i + 1);
 
-    const nameSpan = crtElementWithClasses(`span`, `sectionName__name`);
+    const nameSpan = createElementWithClasses(`span`, `sectionName__name`);
     nameSpan.textContent = sections[i].dataset.name;
 
     sectionName.appendChild(numberSpan);
@@ -120,6 +120,7 @@ document.body.onload = () => {
   function activatePage(id, animationIsUpwards) {
     const page = sections[id];
     const mainMenuEntry = mainMenuElements[id];
+    // TODO simplify
     const sectionNavLPContainer = Array.from(
       sectionNavContainer.children
     ).filter((val) => {
@@ -151,6 +152,7 @@ document.body.onload = () => {
     mainMenuEntry.classList.remove(`mainMenuElement_current`);
   }
 
+  // TODO REMAINDER OPERATOR AND PURE FUNCTION
   function formatId(id) {
     if (id >= sections.length) {
       return 0;
@@ -161,7 +163,7 @@ document.body.onload = () => {
     return id;
   }
 
-  function crtElementWithClasses(element, ...classes) {
+  function createElementWithClasses(element, ...classes) {
     const local = document.createElement(element);
 
     if (classes.length > 0) {
