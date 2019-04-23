@@ -79,6 +79,8 @@ document.body.onload = () => {
     sectionNavLPContainer.lastChild.classList.add(`sectionName_nameShown`);
 
     mainMenuEntry.classList.add(`mainMenuElement_current`);
+
+    page.classList.add(`pageSection_active`);
   }
 
   function deactivatePage(id, animationIsUpwards) {
@@ -94,6 +96,8 @@ document.body.onload = () => {
     sectionNavLPContainer.lastChild.classList.remove(`sectionName_nameShown`);
 
     mainMenuEntry.classList.remove(`mainMenuElement_current`);
+
+    page.classList.remove(`pageSection_active`);
   }
 
   function formatIdx(idx, arrLength) {

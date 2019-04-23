@@ -265,6 +265,11 @@ $transition: 0.4s cubic-bezier(.46,.03,.52,.96);
   visibility: hidden;
   opacity: 0;
   transition: $transition;
+  // tmp styles
+  color: white;
+  text-align: center;
+  border: 2px solid white;
+  border-style: dashed;
 }
 .pageSection_active {
   visibility: visible;
