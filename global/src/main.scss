@@ -229,6 +229,7 @@ $transition: 0.4s cubic-bezier(.46,.03,.52,.96);
 }
 .sectionName__number {
   grid-column: 1 / span 1;
+  cursor: pointer;
 }
 .sectionName__name {
   grid-column: 3 / span 1;
@@ -243,6 +244,10 @@ $transition: 0.4s cubic-bezier(.46,.03,.52,.96);
   .sectionName__name {
     visibility: visible;
     opacity: 1;
+  }
+
+  .sectionName__number {
+    cursor: default;
   }
 }
 // --- sectionsContainer ---

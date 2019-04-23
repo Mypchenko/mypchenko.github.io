@@ -196,6 +196,8 @@ document.body.onload = () => {
         `sectionName__number`
       );
       numberSpan.textContent = adjustNumLength(i + 1, 2);
+      numberSpan.dataset.idx = i;
+      numberSpan.addEventListener(`click`, sectionPointClickEvent);
 
       const nameSpan = createElementWithClasses(`span`, `sectionName__name`);
       nameSpan.textContent = sections[i].dataset.name;
@@ -214,5 +216,13 @@ document.body.onload = () => {
         }
       }
     }
+  }
+
+  function sectionPointClickEvent(event) {
+    const id = Number(event.target.dataset.idx);
+
+    if (page.current === id) return;
+
+    scrollToPage(id);
   }
 };
