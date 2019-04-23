@@ -188,4 +188,18 @@ document.body.onload = () => {
 
     e.stopPropagation;
   }
+
+  function wheelEventFunc(event) {
+    if (event.target.classList.contains(`pageReturnArea`)) return;
+
+    if (event.deltaY < 0) {
+      const pageId = formatIdx(pageSection.current - 1, sections.length);
+      scrollToPage(pageId);
+    } else if (event.deltaY > 0) {
+      const pageId = formatIdx(pageSection.current + 1, sections.length);
+      scrollToPage(pageId);
+    }
+
+    event.preventDefault;
+  }
 };
