@@ -153,14 +153,9 @@ document.body.onload = () => {
   }
 
   // TODO REMAINDER OPERATOR AND PURE FUNCTION
-  function formatId(id) {
-    if (id >= sections.length) {
-      return 0;
-    } else if (id < 0) {
-      return sections.length - 1;
-    }
-
-    return id;
+  function formatIdx(idx, arrLength) {
+    if (idx < 0) return arrLength - 1;
+    return idx % arrLength;
   }
 
   function createElementWithClasses(element, ...classes) {
