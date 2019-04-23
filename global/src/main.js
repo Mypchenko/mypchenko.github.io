@@ -1,22 +1,24 @@
 document.body.onload = () => {
   const page = document.getElementsByClassName(`pageContainer`)[0];
-  const mainMenuBtn = document.getElementsByClassName(`mainMenuBtn`)[0];
-  const mainMenuElements = Array.from(
-    document.getElementsByClassName(`mainMenuElement`)
-  );
   const pageReturnArea = document.getElementsByClassName(`pageReturnArea`)[0];
+  const mainMenuContainer = document.getElementsByClassName(`mainMenu`)[0];
+  const mainMenuBtn = document.getElementsByClassName(`mainMenuBtn`)[0];
   const sectionsContainer = document.getElementsByClassName(
     `sectionsContainer`
   )[0];
   const sections = sectionsContainer.children;
 
   // --- main menu ---
-  for (let i = 0; i < mainMenuElements.length; ++i) {
-    mainMenuElements[i].style.transitionDelay = `${i * 0.05}s`;
-  }
 
-  pageReturnArea.addEventListener(`click`, mainMenuViewToggle);
-  mainMenuBtn.addEventListener(`click`, mainMenuViewToggle);
+  createMainMenuEntries(
+    sections,
+    mainMenuContainer,
+    mainMenuBtn,
+    pageReturnArea
+  );
+  const mainMenuElements = Array.from(
+    document.getElementsByClassName(`mainMenuElement`)
+  );
 
   // --- section nav ---
   const sectionNavContainer = document.getElementsByClassName(
@@ -200,5 +202,19 @@ document.body.onload = () => {
     }
 
     event.preventDefault;
+  }
+
+  function createMainMenuEntries(sourceEntries, container, ...menuButtons) {
+    const list = document.createElement(`ul`);
+    for (const entry of sourceEntries) {
+      const menuElement = createElementWithClasses(`li`, `mainMenuElement`);
+      menuElement.textContent = entry.dataset.name;
+      list.appendChild(menuElement);
+    }
+    container.appendChild(list);
+
+    for (const button of menuButtons) {
+      button.addEventListener(`click`, mainMenuViewToggle);
+    }
   }
 };
