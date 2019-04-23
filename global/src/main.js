@@ -138,7 +138,6 @@ document.body.onload = () => {
     mainMenuEntry.classList.remove(`mainMenuElement_current`);
   }
 
-  // TODO REMAINDER OPERATOR AND PURE FUNCTION
   function formatIdx(idx, arrLength) {
     if (idx < 0) return arrLength - 1;
     return idx % arrLength;
