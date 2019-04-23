@@ -49,7 +49,7 @@ document.body.onload = () => {
     const sectionName = createElementWithClasses(`div`, `sectionName`);
 
     const numberSpan = createElementWithClasses(`span`, `sectionName__number`);
-    numberSpan.textContent = toTwoDigits(i + 1);
+    numberSpan.textContent = adjustNumLength(i + 1, 2);
 
     const nameSpan = createElementWithClasses(`span`, `sectionName__name`);
     nameSpan.textContent = sections[i].dataset.name;
@@ -175,11 +175,15 @@ document.body.onload = () => {
     return local;
   }
 
-  function toTwoDigits(num) {
+  function adjustNumLength(num, length) {
     let str = String(num);
 
-    while (str.length < 2) {
-      str = `0` + str;
+    if (str.length < length) {
+      while (str.length < length) {
+        str = `0` + str;
+      }
+    } else {
+      str = str.slice(str.length - length);
     }
 
     return str;
