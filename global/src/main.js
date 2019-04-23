@@ -3,6 +3,9 @@ document.body.onload = () => {
   const pageReturnArea = document.getElementsByClassName(`pageReturnArea`)[0];
   const mainMenuContainer = document.getElementsByClassName(`mainMenu`)[0];
   const mainMenuBtn = document.getElementsByClassName(`mainMenuBtn`)[0];
+  const sectionNavContainer = document.getElementsByClassName(
+    `sectionNavContainer`
+  )[0];
   const sectionsContainer = document.getElementsByClassName(
     `sectionsContainer`
   )[0];
@@ -21,57 +24,11 @@ document.body.onload = () => {
   );
 
   // --- section nav ---
-  const sectionNavContainer = document.getElementsByClassName(
-    `sectionNavContainer`
-  )[0];
-  const sectionNavLinePointContainer = createElementWithClasses(
-    `div`,
-    `sectionNavLinePointContainer`
-  );
 
-  const sectionNavLinePoint = createElementWithClasses(
-    `div`,
-    `sectionNavLinePoint`
-  );
-
-  sectionNavLinePointContainer.appendChild(sectionNavLinePoint.cloneNode());
-
-  for (let i = 0; i < sections.length; ++i) {
-    const sectionNavLinePointContainerCopy = sectionNavLinePointContainer.cloneNode(
-      { deep: true }
-    );
-
-    sectionNavLinePointContainerCopy.firstChild.classList.add(
-      `sectionNavLinePoint_active`
-    );
-    sectionNavLinePointContainerCopy.classList.add(
-      `sectionNavLinePointContainer_active`
-    );
-
-    const sectionName = createElementWithClasses(`div`, `sectionName`);
-
-    const numberSpan = createElementWithClasses(`span`, `sectionName__number`);
-    numberSpan.textContent = adjustNumLength(i + 1, 2);
-
-    const nameSpan = createElementWithClasses(`span`, `sectionName__name`);
-    nameSpan.textContent = sections[i].dataset.name;
-
-    sectionName.appendChild(numberSpan);
-    sectionName.appendChild(nameSpan);
-
-    sectionNavLinePointContainerCopy.appendChild(sectionName);
-    sectionNavContainer.appendChild(sectionNavLinePointContainerCopy);
-
-    if (i < sections.length - 1) {
-      for (let i = 0; i < 3; ++i) {
-        sectionNavContainer.appendChild(
-          sectionNavLinePointContainer.cloneNode({ deep: true })
-        );
-      }
-    }
-  }
+  createSectionPoints(sections, sectionNavContainer);
 
   // TODO --- scrolling events ---
+
   page.addEventListener(`wheel`, wheelEventFunc);
 
   // --- start section ---
@@ -108,12 +65,9 @@ document.body.onload = () => {
   function activatePage(id, animationIsUpwards) {
     const page = sections[id];
     const mainMenuEntry = mainMenuElements[id];
-    // TODO simplify
-    const sectionNavLPContainer = Array.from(
-      sectionNavContainer.children
-    ).filter((val) => {
-      return val.classList.contains(`sectionNavLinePointContainer_active`);
-    })[id];
+    const sectionNavLPContainer = document.getElementsByClassName(
+      `sectionNavLinePointContainer_active`
+    )[id];
 
     sectionNavLPContainer.firstChild.classList.add(
       `sectionNavLinePoint_selected`
@@ -126,11 +80,9 @@ document.body.onload = () => {
   function deactivatePage(id, animationIsUpwards) {
     const page = sections[id];
     const mainMenuEntry = mainMenuElements[id];
-    const sectionNavLPContainer = Array.from(
-      sectionNavContainer.children
-    ).filter((val) => {
-      return val.classList.contains(`sectionNavLinePointContainer_active`);
-    })[id];
+    const sectionNavLPContainer = document.getElementsByClassName(
+      `sectionNavLinePointContainer_active`
+    )[id];
 
     sectionNavLPContainer.firstChild.classList.remove(
       `sectionNavLinePoint_selected`
@@ -204,9 +156,9 @@ document.body.onload = () => {
     event.preventDefault;
   }
 
-  function createMainMenuEntries(sourceEntries, container, ...menuButtons) {
+  function createMainMenuEntries(entriesSource, container, ...menuButtons) {
     const list = document.createElement(`ul`);
-    for (const entry of sourceEntries) {
+    for (const entry of entriesSource) {
       const menuElement = createElementWithClasses(`li`, `mainMenuElement`);
       menuElement.textContent = entry.dataset.name;
       list.appendChild(menuElement);
@@ -215,6 +167,52 @@ document.body.onload = () => {
 
     for (const button of menuButtons) {
       button.addEventListener(`click`, mainMenuViewToggle);
+    }
+  }
+
+  function createSectionPoints(entriesSource, container) {
+    const sectionNavLinePointContainer = createElementWithClasses(
+      `div`,
+      `sectionNavLinePointContainer`
+    );
+    const sectionNavLinePoint = createElementWithClasses(
+      `div`,
+      `sectionNavLinePoint`
+    );
+    sectionNavLinePointContainer.appendChild(sectionNavLinePoint.cloneNode());
+
+    for (let i = 0; i < sections.length; ++i) {
+      const containerCopy = sectionNavLinePointContainer.cloneNode({
+        deep: true,
+      });
+
+      containerCopy.firstChild.classList.add(`sectionNavLinePoint_active`);
+      containerCopy.classList.add(`sectionNavLinePointContainer_active`);
+
+      const sectionName = createElementWithClasses(`div`, `sectionName`);
+
+      const numberSpan = createElementWithClasses(
+        `span`,
+        `sectionName__number`
+      );
+      numberSpan.textContent = adjustNumLength(i + 1, 2);
+
+      const nameSpan = createElementWithClasses(`span`, `sectionName__name`);
+      nameSpan.textContent = sections[i].dataset.name;
+
+      sectionName.appendChild(numberSpan);
+      sectionName.appendChild(nameSpan);
+
+      containerCopy.appendChild(sectionName);
+      container.appendChild(containerCopy);
+
+      if (i < sections.length - 1) {
+        for (let i = 0; i < 3; ++i) {
+          container.appendChild(
+            sectionNavLinePointContainer.cloneNode({ deep: true })
+          );
+        }
+      }
     }
   }
 };
