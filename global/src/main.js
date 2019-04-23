@@ -1,4 +1,6 @@
 document.body.onload = () => {
+  // --- page elements ---
+
   const page = document.getElementsByClassName(`pageContainer`)[0];
   const pageReturnArea = document.getElementsByClassName(`pageReturnArea`)[0];
   const mainMenuContainer = document.getElementsByClassName(`mainMenu`)[0];
@@ -43,6 +45,8 @@ document.body.onload = () => {
 
   function scrollToPage(id) {
     if (!busy) {
+      if (page.current === id) return;
+
       busy = true;
 
       const animationIsUpwards =
@@ -123,7 +127,7 @@ document.body.onload = () => {
     return str;
   }
 
-  function mainMenuViewToggle(e) {
+  function mainMenuViewToggle(event) {
     const isOpeningAnimation = page.classList.toggle(`pageContainer_zoomedOut`);
     pageReturnArea.classList.toggle(`inactive`);
 
@@ -139,7 +143,7 @@ document.body.onload = () => {
       element.classList.toggle(`mainMenuElement_appear`);
     });
 
-    e.stopPropagation;
+    if (event) event.stopPropagation;
   }
 
   function wheelEventFunc(event) {
@@ -158,9 +162,12 @@ document.body.onload = () => {
 
   function createMainMenuEntries(entriesSource, container, ...menuButtons) {
     const list = document.createElement(`ul`);
-    for (const entry of entriesSource) {
+    for (let i = 0; i < entriesSource.length; ++i) {
+      const entry = entriesSource[i];
       const menuElement = createElementWithClasses(`li`, `mainMenuElement`);
       menuElement.textContent = entry.dataset.name;
+      menuElement.dataset.idx = i;
+      menuElement.addEventListener(`click`, mainMenuClickFunc);
       list.appendChild(menuElement);
     }
     container.appendChild(list);
@@ -221,8 +228,17 @@ document.body.onload = () => {
   function sectionPointClickEvent(event) {
     const id = Number(event.target.dataset.idx);
 
-    if (page.current === id) return;
-
     scrollToPage(id);
+  }
+
+  function mainMenuClickFunc(event) {
+    const id = Number(event.target.dataset.idx);
+
+    if (event.target.classList.contains(`mainMenuElement_current`)) return;
+
+    mainMenuViewToggle();
+    setTimeout(() => {
+      scrollToPage(id);
+    }, 200);
   }
 };

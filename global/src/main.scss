@@ -75,22 +75,21 @@ $transition: 0.4s cubic-bezier(.46,.03,.52,.96);
   opacity: 0;
 
   &:before {
-    transition: $transition;
+    transition-delay: 0.5s;
     content: '';
     display: block;
     position: absolute;
     top: 0.55em;
-    right: -75%;
-    transform: scaleX(0);
+    right: -12.5%;
     width: 125%;
     height: 0.275em;
+    visibility: hidden;
     background-color: $accentColor;
   }
 }
 .mainMenuElement_current {
   &:before {
-    transform: scaleX(1);
-    right: -12.5%;
+    visibility: visible;
   }
 }
 .mainMenuElement_appear {
