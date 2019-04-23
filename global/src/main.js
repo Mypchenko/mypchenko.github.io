@@ -70,21 +70,7 @@ document.body.onload = () => {
   }
 
   // TODO --- scrolling events ---
-  page.addEventListener(`wheel`, (event) => {
-    if (event.target.classList.contains(`pageReturnArea`)) {
-      return;
-    }
-
-    if (event.deltaY < 0) {
-      const pageId = formatId(pageSection.current - 1);
-      scrollToPage(pageId);
-    } else if (event.deltaY > 0) {
-      const pageId = formatId(pageSection.current + 1);
-      scrollToPage(pageId);
-    }
-
-    event.preventDefault;
-  });
+  page.addEventListener(`wheel`, wheelEventFunc);
 
   // --- start section ---
   const pageSection = {
