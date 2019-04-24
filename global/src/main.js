@@ -61,43 +61,51 @@ document.body.onload = () => {
 
       setTimeout(() => {
         busy = false;
-      }, 500);
+      }, 400);
     }
     busy = true;
   }
 
   function activatePage(id, animationIsUpwards) {
+    toggleNavigationEntries(id);
+
     const page = sections[id];
-    const mainMenuEntry = mainMenuElements[id];
-    const sectionNavLPContainer = document.getElementsByClassName(
-      `sectionNavLinePointContainer_active`
-    )[id];
+    const animationClass = !animationIsUpwards
+      ? `pageSection_above`
+      : `pageSection_below`;
 
-    sectionNavLPContainer.firstChild.classList.add(
-      `sectionNavLinePoint_selected`
-    );
-    sectionNavLPContainer.lastChild.classList.add(`sectionName_nameShown`);
-
-    mainMenuEntry.classList.add(`mainMenuElement_current`);
-
+    page.classList.add(animationClass);
     page.classList.add(`pageSection_active`);
+    setTimeout(() => {
+      page.classList.remove(animationClass);
+    }, 50);
   }
 
   function deactivatePage(id, animationIsUpwards) {
+    toggleNavigationEntries(id);
+
     const page = sections[id];
+    const animationClass = animationIsUpwards
+      ? `pageSection_above`
+      : `pageSection_below`;
+
+    page.classList.add(animationClass);
+    page.classList.remove(`pageSection_active`);
+    setTimeout(() => {
+      page.classList.remove(animationClass);
+    }, 400);
+  }
+
+  function toggleNavigationEntries(id) {
     const mainMenuEntry = mainMenuElements[id];
     const sectionNavLPContainer = document.getElementsByClassName(
       `sectionNavLinePointContainer_active`
     )[id];
-
-    sectionNavLPContainer.firstChild.classList.remove(
+    sectionNavLPContainer.firstChild.classList.toggle(
       `sectionNavLinePoint_selected`
     );
-    sectionNavLPContainer.lastChild.classList.remove(`sectionName_nameShown`);
-
-    mainMenuEntry.classList.remove(`mainMenuElement_current`);
-
-    page.classList.remove(`pageSection_active`);
+    sectionNavLPContainer.lastChild.classList.toggle(`sectionName_nameShown`);
+    mainMenuEntry.classList.toggle(`mainMenuElement_current`);
   }
 
   function formatIdx(idx, arrLength) {

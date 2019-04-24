@@ -255,6 +255,7 @@ $transition: 0.4s cubic-bezier(.46,.03,.52,.96);
   grid-column: 3 / span 10;
   grid-row: 2 / span 1;
   align-self: stretch;
+
 }
 
 // --- pageSection ---
@@ -265,13 +266,21 @@ $transition: 0.4s cubic-bezier(.46,.03,.52,.96);
   visibility: hidden;
   opacity: 0;
   transition: $transition;
+  transform: scale(0.75);
   // tmp styles
   color: white;
   text-align: center;
-  border: 2px solid white;
-  border-style: dashed;
+  border: 2px dashed white;
 }
 .pageSection_active {
   visibility: visible;
   opacity: 1;
+  top: 0;
+  transform: scale(1);
+}
+.pageSection_above {
+  top: -100%;
+}
+.pageSection_below {
+  top: 100%;
 }
