@@ -35,11 +35,11 @@ document.body.onload = () => {
 
   // --- start section ---
   const pageSection = {
-    previous: sections.length - 1,
-    current: sections.length - 1,
+    previous: 0,
+    current: 0,
   };
   let busy = false;
-  scrollToPage(0);
+  activatePage(0);
 
   // --- functions ---
 
