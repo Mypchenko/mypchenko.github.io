@@ -309,7 +309,11 @@ document.body.onload = () => {
   function sectionPointClickEvent(event) {
     const id = Number(event.target.dataset.idx);
 
-    if (event.path[1].classList.contains(`sectionName_nameShown`)) return;
+    if (
+      event.target.parentElement.classList.contains(`sectionName_nameShown`)
+    ) {
+      return;
+    }
 
     scrollToPage(id);
   }
