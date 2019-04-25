@@ -41,7 +41,7 @@ $transition: 0.4s cubic-bezier(.46,.03,.52,.96);
   font-weight: 700;
   width: max-content;
 }
-.bootstrapGrid {
+.col12bootstrapGrid {
   width: 100%;
   height: 100%;
   transform-style: initial;
@@ -49,7 +49,17 @@ $transition: 0.4s cubic-bezier(.46,.03,.52,.96);
   display: grid;
   align-items: start;
   grid-template-columns: repeat(12, 1fr);
-  grid-gap: 0 calc(100% / 36);
+  grid-gap: 0 calc(100% / 12 / 3);
+}
+.col10bootstrapGrid {
+  width: 100%;
+  height: 100%;
+  transform-style: initial;
+  box-sizing: border-box;
+  display: grid;
+  align-items: start;
+  grid-template-columns: repeat(10, 1fr);
+  grid-gap: 0 calc(100% / 10 / 3);
 }
 
 // --- mainMenu ---
@@ -259,7 +269,6 @@ $transition: 0.4s cubic-bezier(.46,.03,.52,.96);
   grid-column: 3 / span 10;
   grid-row: 2 / span 1;
   align-self: stretch;
-
 }
 
 // --- pageSection ---
