@@ -33,13 +33,31 @@ document.body.onload = () => {
 
   page.addEventListener(`wheel`, wheelEventFunc);
 
-  page.addEventListener(`mousedown`, (outerEvent) => {
-    const pathInfo = {
-      time: 0,
-      length: 0,
-      angle: 0,
-    };
+  page.addEventListener(`touchstart`, (outerEvent) => {
+    if (outerEvent.touches.length == 1) {
+      page.addEventListener(`touchend`, touchendEvent);
+    }
 
+    function touchendEvent(innerEvent) {
+      page.removeEventListener(`touchend`, touchendEvent);
+
+      const xChange =
+        innerEvent.changedTouches[0].clientX -
+        outerEvent.changedTouches[0].clientX;
+      const yChange =
+        (innerEvent.changedTouches[0].clientY -
+          outerEvent.changedTouches[0].clientY) *
+        -1;
+
+      swipeAction(
+        innerEvent.timeStamp - outerEvent.timeStamp,
+        xChange,
+        yChange
+      );
+    }
+  });
+
+  page.addEventListener(`mousedown`, (outerEvent) => {
     page.addEventListener(`mouseup`, mouseupEvent);
 
     function mouseupEvent(innerEvent) {
@@ -48,29 +66,11 @@ document.body.onload = () => {
       const xChange = innerEvent.clientX - outerEvent.clientX;
       const yChange = (innerEvent.clientY - outerEvent.clientY) * -1;
 
-      pathInfo.time = innerEvent.timeStamp - outerEvent.timeStamp;
-      pathInfo.length = Math.sqrt(xChange ** 2 + yChange ** 2);
-      pathInfo.angle = calcPathAngle(xChange, yChange);
-
-      if (
-        pathInfo.time > 50 &&
-        pathInfo.length > 10 &&
-        pathInfo.angle !== null
-      ) {
-        if (
-          pathInfo.angle >= Math.PI / 4 &&
-          pathInfo.angle <= 3 * Math.PI / 4
-        ) {
-          const pageId = formatIdx(pageSection.current - 1, sections.length);
-          scrollToPage(pageId);
-        } else if (
-          pathInfo.angle >= 5 * Math.PI / 4 &&
-          pathInfo.angle <= 7 * Math.PI / 4
-        ) {
-          const pageId = formatIdx(pageSection.current + 1, sections.length);
-          scrollToPage(pageId);
-        }
-      }
+      swipeAction(
+        innerEvent.timeStamp - outerEvent.timeStamp,
+        xChange,
+        yChange
+      );
     }
   });
 
@@ -83,6 +83,21 @@ document.body.onload = () => {
   activatePage(0);
 
   // --- functions ---
+
+  function swipeAction(time, xChange, yChange) {
+    const length = Math.sqrt(xChange ** 2 + yChange ** 2);
+    const angle = calcPathAngle(xChange, yChange);
+
+    if (time > 50 && length > 10 && angle !== null) {
+      if (angle >= Math.PI / 4 && angle <= 3 * Math.PI / 4) {
+        const pageId = formatIdx(pageSection.current - 1, sections.length);
+        scrollToPage(pageId);
+      } else if (angle >= 5 * Math.PI / 4 && angle <= 7 * Math.PI / 4) {
+        const pageId = formatIdx(pageSection.current + 1, sections.length);
+        scrollToPage(pageId);
+      }
+    }
+  }
 
   function calcPathAngle(x, y) {
     const tmp = Math.atan2(y, x);
