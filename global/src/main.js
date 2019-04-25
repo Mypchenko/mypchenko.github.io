@@ -33,6 +33,47 @@ document.body.onload = () => {
 
   page.addEventListener(`wheel`, wheelEventFunc);
 
+  page.addEventListener(`mousedown`, (outerEvent) => {
+    const pathInfo = {
+      time: 0,
+      length: 0,
+      angle: 0,
+    };
+
+    page.addEventListener(`mouseup`, mouseupEvent);
+
+    function mouseupEvent(innerEvent) {
+      page.removeEventListener(`mouseup`, mouseupEvent);
+
+      const xChange = innerEvent.clientX - outerEvent.clientX;
+      const yChange = (innerEvent.clientY - outerEvent.clientY) * -1;
+
+      pathInfo.time = innerEvent.timeStamp - outerEvent.timeStamp;
+      pathInfo.length = Math.sqrt(xChange ** 2 + yChange ** 2);
+      pathInfo.angle = calcPathAngle(xChange, yChange);
+
+      if (
+        pathInfo.time > 50 &&
+        pathInfo.length > 10 &&
+        pathInfo.angle !== null
+      ) {
+        if (
+          pathInfo.angle >= Math.PI / 4 &&
+          pathInfo.angle <= 3 * Math.PI / 4
+        ) {
+          const pageId = formatIdx(pageSection.current - 1, sections.length);
+          scrollToPage(pageId);
+        } else if (
+          pathInfo.angle >= 5 * Math.PI / 4 &&
+          pathInfo.angle <= 7 * Math.PI / 4
+        ) {
+          const pageId = formatIdx(pageSection.current + 1, sections.length);
+          scrollToPage(pageId);
+        }
+      }
+    }
+  });
+
   // --- start section ---
   const pageSection = {
     previous: 0,
@@ -42,6 +83,15 @@ document.body.onload = () => {
   activatePage(0);
 
   // --- functions ---
+
+  function calcPathAngle(x, y) {
+    const tmp = Math.atan2(y, x);
+
+    if (x === 0 && y === 0) return null;
+    if (tmp < 0) return Math.PI + (Math.PI - tmp * -1);
+
+    return tmp;
+  }
 
   function scrollToPage(id) {
     if (!busy) {
@@ -239,6 +289,8 @@ document.body.onload = () => {
 
   function sectionPointClickEvent(event) {
     const id = Number(event.target.dataset.idx);
+
+    if (event.path[1].classList.contains(`sectionName_nameShown`)) return;
 
     scrollToPage(id);
   }
