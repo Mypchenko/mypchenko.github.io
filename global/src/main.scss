@@ -10,6 +10,9 @@ $transition: 0.4s cubic-bezier(.46,.03,.52,.96);
 .html {
   background-color: $backgroundColor;
   font-size: 16px;
+  min-width: 100vw;
+  min-height: 100vh;
+  overflow: hidden;
 }
 .body {
   width: 100%;
