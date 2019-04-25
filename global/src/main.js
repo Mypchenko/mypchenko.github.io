@@ -52,7 +52,8 @@ document.body.onload = () => {
       swipeAction(
         innerEvent.timeStamp - outerEvent.timeStamp,
         xChange,
-        yChange
+        yChange,
+        outerEvent.target
       );
     }
   });
@@ -69,7 +70,8 @@ document.body.onload = () => {
       swipeAction(
         innerEvent.timeStamp - outerEvent.timeStamp,
         xChange,
-        yChange
+        yChange,
+        outerEvent.target
       );
     }
   });
@@ -84,9 +86,11 @@ document.body.onload = () => {
 
   // --- functions ---
 
-  function swipeAction(time, xChange, yChange) {
+  function swipeAction(time, xChange, yChange, target) {
     const length = Math.sqrt(xChange ** 2 + yChange ** 2);
     const angle = calcPathAngle(xChange, yChange);
+
+    if (target.classList.contains(`pageReturnArea`)) return;
 
     if (time > 50 && length > 10 && angle !== null) {
       if (angle >= Math.PI / 4 && angle <= 3 * Math.PI / 4) {
