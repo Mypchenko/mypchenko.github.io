@@ -11,7 +11,10 @@ document.body.onload = () => {
   const sectionsContainer = document.getElementsByClassName(
     `sectionsContainer`
   )[0];
-  const sections = sectionsContainer.children;
+  const sections = Array.from(sectionsContainer.children).filter(
+    (val) => val.nodeName === `SECTION`
+  );
+  const pageControls = document.getElementsByClassName(`pageControls`)[0];
 
   // --- main menu ---
 
@@ -28,6 +31,10 @@ document.body.onload = () => {
   // --- section nav ---
 
   createSectionPoints(sections, sectionNavContainer);
+
+  // --- page controls ---
+
+  pageControls.addEventListener(`click`, pageControlFunc);
 
   // TODO --- scrolling events ---
 
@@ -58,24 +65,6 @@ document.body.onload = () => {
     }
   });
 
-  page.addEventListener(`mousedown`, (outerEvent) => {
-    page.addEventListener(`mouseup`, mouseupEvent);
-
-    function mouseupEvent(innerEvent) {
-      page.removeEventListener(`mouseup`, mouseupEvent);
-
-      const xChange = innerEvent.clientX - outerEvent.clientX;
-      const yChange = (innerEvent.clientY - outerEvent.clientY) * -1;
-
-      swipeAction(
-        innerEvent.timeStamp - outerEvent.timeStamp,
-        xChange,
-        yChange,
-        outerEvent.target
-      );
-    }
-  });
-
   // --- start section ---
   const pageSection = {
     previous: 0,
@@ -85,6 +74,26 @@ document.body.onload = () => {
   activatePage(0);
 
   // --- functions ---
+
+  function pageControlFunc(event) {
+    if (scrollIsUp(event.target)) {
+      const pageId = formatIdx(pageSection.current - 1, sections.length);
+      scrollToPage(pageId);
+    } else {
+      const pageId = formatIdx(pageSection.current + 1, sections.length);
+      scrollToPage(pageId);
+    }
+
+    event.stopPropagation;
+
+    function scrollIsUp(target) {
+      if (target.nodeName === `IMG`) {
+        return target.classList.contains(`pageControlBtn__img_up`);
+      } else {
+        return target.firstChild.classList.contains(`pageControlBtn__img_up`);
+      }
+    }
+  }
 
   function swipeAction(time, xChange, yChange, target) {
     const length = Math.sqrt(xChange ** 2 + yChange ** 2);

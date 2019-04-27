@@ -270,7 +270,41 @@ $transition: 0.4s cubic-bezier(.46,.03,.52,.96);
   grid-row: 2 / span 1;
   align-self: stretch;
 }
+// --- pageControls ---
+.pageControls {
+  position: absolute;
+  left: -3em;
+  height: 100%;
+  display: grid;
+}
+// --- pageControlBtn ---
+.pageControlBtn {
+  cursor: pointer;
+  border: none;
+  background: none;
+  width: 3em;
+  padding: 0 0.5em;
+  font-size: inherit;
+}
+.pageControlBtn:hover {
+  .pageControlBtn__img_up {
+    transform: rotate(90deg) translateX(-20%);
+  }
+  .pageControlBtn__img_down {
+    transform: rotate(-90deg) translateX(-20%);
+  }
+}
+.pageControlBtn__img {
+  transition: $transition;
+  width: 100%;
+}
+.pageControlBtn__img_up {
+  transform: rotate(90deg);
+}
+.pageControlBtn__img_down {
+  transform: rotate(-90deg);
 
+}
 // --- pageSection ---
 .pageSection {
   width: 100%;
