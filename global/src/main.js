@@ -127,12 +127,12 @@ document.body.onload = () => {
 
       busy = true;
 
-      const animationIsUpwards =
+      const animationIsDownwards =
         pageSection.current - id === 1 ||
         (id === sections.length - 1 && pageSection.current === 0);
 
-      deactivatePage(pageSection.current, animationIsUpwards);
-      activatePage(id, animationIsUpwards);
+      deactivatePage(pageSection.current, animationIsDownwards);
+      activatePage(id, animationIsDownwards);
 
       pageSection.previous = pageSection.current;
       pageSection.current = id;
@@ -144,11 +144,11 @@ document.body.onload = () => {
     busy = true;
   }
 
-  function activatePage(id, animationIsUpwards) {
+  function activatePage(id, animationIsDownwards) {
     toggleNavigationEntries(id);
 
     const page = sections[id];
-    const animationClass = !animationIsUpwards
+    const animationClass = animationIsDownwards
       ? `pageSection_above`
       : `pageSection_below`;
 
@@ -159,13 +159,13 @@ document.body.onload = () => {
     }, 50);
   }
 
-  function deactivatePage(id, animationIsUpwards) {
+  function deactivatePage(id, animationIsDownwards) {
     toggleNavigationEntries(id);
 
     const page = sections[id];
-    const animationClass = animationIsUpwards
-      ? `pageSection_above`
-      : `pageSection_below`;
+    const animationClass = animationIsDownwards
+      ? `pageSection_below`
+      : `pageSection_above`;
 
     page.classList.add(animationClass);
     page.classList.remove(`pageSection_active`);
