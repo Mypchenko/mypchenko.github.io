@@ -219,7 +219,9 @@ document.body.onload = () => {
 
   function mainMenuViewToggle(event) {
     const isOpeningAnimation = page.classList.toggle(`pageContainer_zoomedOut`);
-    pageReturnArea.classList.toggle(`inactive`);
+    setTimeout(() => {
+      pageReturnArea.classList.toggle(`inactive`);
+    }, isOpeningAnimation ? 0 : 400);
 
     const transitionDelayCf = isOpeningAnimation ? 0.05 : 0.02;
 
