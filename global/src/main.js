@@ -36,9 +36,9 @@ document.body.onload = () => {
 
   pageControls.addEventListener(`click`, pageControlFunc);
 
-  // TODO --- scrolling events ---
+  // --- scrolling events ---
 
-  page.addEventListener(`wheel`, wheelEventFunc);
+  document.addEventListener(`wheel`, wheelEventFunc);
 
   page.addEventListener(`touchstart`, (outerEvent) => {
     if (outerEvent.touches.length == 1) {
