@@ -89,13 +89,13 @@ $transition: 0.4s cubic-bezier(0.46, 0.03, 0.52, 0.96);
   opacity: 0;
 
   &:before {
-    transition-delay: 0.5s;
+    transition: $transition;
     content: '';
     display: block;
     position: absolute;
     top: 0.55em;
     right: -12.5%;
-    width: 125%;
+    width: 0;
     height: 0.275em;
     visibility: hidden;
     background-color: $accentColor;
@@ -103,6 +103,7 @@ $transition: 0.4s cubic-bezier(0.46, 0.03, 0.52, 0.96);
 }
 .mainMenuElement_current {
   &:before {
+    width: 125%;
     visibility: visible;
   }
 }
