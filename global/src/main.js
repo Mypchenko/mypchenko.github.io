@@ -103,10 +103,10 @@ document.body.onload = () => {
 
     if (time > 50 && length > 10 && angle !== null) {
       if (angle >= Math.PI / 4 && angle <= 3 * Math.PI / 4) {
-        const pageId = formatIdx(pageSection.current - 1, sections.length);
+        const pageId = formatIdx(pageSection.current + 1, sections.length);
         scrollToPage(pageId);
       } else if (angle >= 5 * Math.PI / 4 && angle <= 7 * Math.PI / 4) {
-        const pageId = formatIdx(pageSection.current + 1, sections.length);
+        const pageId = formatIdx(pageSection.current - 1, sections.length);
         scrollToPage(pageId);
       }
     }
