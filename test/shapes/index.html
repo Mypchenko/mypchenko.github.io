@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+  <link rel="stylesheet" href="dist/main.min.css">
+</head>
+<body>
+  <div data-shape-name="trapezoid" class="shapeContainer">
+    <canvas class="shapeCanvas" width="300" height="300"></canvas>
+    <div class="controls">
+      <div class="slider">
+        <p class="name">Altitude</p>
+        <div data-min-value="1" data-max-value="300" class="slider__body">
+          <div class="slider__line"></div>
+          <div class="slider__circle"></div>
+        </div>
+      </div>
+      <div class="slider">
+        <p class="name">A</p>
+        <div data-min-value="1" data-max-value="300" class="slider__body">
+          <div class="slider__line"></div>
+          <div class="slider__circle"></div>
+        </div>
+      </div>
+      <div class="slider">
+        <p class="name">B</p>
+        <div data-min-value="1" data-max-value="300" class="slider__body">
+          <div class="slider__line"></div>
+          <div class="slider__circle"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div data-shape-name="redDiamond" class="shapeContainer">
+    <canvas class="shapeCanvas" width="300" height="300"></canvas>
+    <div class="controls">
+      <div class="slider">
+        <p class="name">Width</p>
+        <div data-min-value="1" data-max-value="600" class="slider__body">
+          <div class="slider__line"></div>
+          <div class="slider__circle"></div>
+        </div>
+      </div>
+      <div class="slider">
+        <p class="name">Rotation</p>
+        <div data-min-value="0" data-max-value="90" class="slider__body">
+          <div class="slider__line"></div>
+          <div class="slider__circle"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div data-shape-name="zigZagLine" class="shapeContainer">
+    <canvas class="shapeCanvas" width="300" height="300"></canvas>
+    <div class="controls">
+      <div class="slider">
+        <p class="name">Step size</p>
+        <div data-min-value="1" data-max-value="300" class="slider__body">
+          <div class="slider__line"></div>
+          <div class="slider__circle"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div data-shape-name="spiral" class="shapeContainer">
+    <canvas class="shapeCanvas" width="300" height="300"></canvas>
+    <div class="controls">
+      <div class="slider">
+        <p class="name">Step size</p>
+        <div data-min-value="0.5" data-max-value="300" class="slider__body">
+          <div class="slider__line"></div>
+          <div class="slider__circle"></div>
+        </div>
+      </div>
+      <div class="slider">
+        <p class="name">Quality</p>
+        <div data-min-value="2" data-max-value="20" class="slider__body">
+          <div class="slider__line"></div>
+          <div class="slider__circle"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div data-shape-name="star" class="shapeContainer">
+    <canvas class="shapeCanvas" width="300" height="300"></canvas>
+    <div class="controls">
+      <div class="slider">
+        <p class="name">Radius</p>
+        <div data-min-value="1" data-max-value="215" class="slider__body">
+          <div class="slider__line"></div>
+          <div class="slider__circle"></div>
+        </div>
+      </div>
+      <div class="slider">
+        <p class="name">Vertices count</p>
+        <div data-min-value="1" data-max-value="128" class="slider__body">
+          <div class="slider__line"></div>
+          <div class="slider__circle"></div>
+        </div>
+      </div>
+      <div class="slider">
+        <p class="name">Vertex height ratio</p>
+        <div data-min-value="0" data-max-value="1" class="slider__body">
+          <div class="slider__line"></div>
+          <div class="slider__circle"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script src="dist/main.min.js"></script>
+</body>
+</html>
