@@ -141,6 +141,7 @@ document.body.onload = () => {
 
   for (const circle of circles) {
     circle.addEventListener(`mousedown`, (event) => {
+      let busy = false;
       const target = event.target;
       const container =
         target.parentElement.parentElement.parentElement.parentElement;
@@ -165,29 +166,33 @@ document.body.onload = () => {
       }
 
       function mouseMoveEvent(event) {
-        window.requestAnimationFrame(() => {
-          const obj = shapeObjects[name];
-          const [min, max] = obj.argsDefault[index];
-          const diff = max - min;
+        if (!busy) {
+          window.requestAnimationFrame(() => {
+            const obj = shapeObjects[name];
+            const [min, max] = obj.argsDefault[index];
+            const diff = max - min;
 
-          const currentX = event.clientX;
-          let left = 0;
+            const currentX = event.clientX;
+            let left = 0;
 
-          if (currentX >= initialX) {
-            if (currentX > initialX + width) {
-              left = width;
-            } else {
-              left = currentX - initialX;
+            if (currentX >= initialX) {
+              if (currentX > initialX + width) {
+                left = width;
+              } else {
+                left = currentX - initialX;
+              }
             }
-          }
 
-          const ratio = left / width;
-          obj.args[index] = min + diff * ratio;
+            const ratio = left / width;
+            obj.args[index] = min + diff * ratio;
 
-          drawShape(obj);
+            drawShape(obj);
 
-          target.style.left = `${left}px`;
-        });
+            target.style.left = `${left}px`;
+            busy = false;
+          });
+        }
+        busy = true;
       }
     });
   }
