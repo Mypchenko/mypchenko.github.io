@@ -4,6 +4,7 @@ $backgroundColor: #0c0c0c;
 $accentColor: #0f33ff;
 $activeTextColor: #ffffff;
 $sectionNavSideColor: #1b1b1b;
+$inactiveTextColor: #252525;
 
 $transition: 0.4s cubic-bezier(0.46, 0.03, 0.52, 0.96);
 
@@ -319,7 +320,6 @@ $transition: 0.4s cubic-bezier(0.46, 0.03, 0.52, 0.96);
   // tmp styles
   color: white;
   text-align: center;
-  border: 2px dashed white;
 }
 .pageSection_active {
   visibility: visible;
@@ -332,4 +332,120 @@ $transition: 0.4s cubic-bezier(0.46, 0.03, 0.52, 0.96);
 }
 .pageSection_below {
   top: 125%;
+}
+
+//    --- HOME ---
+// --- pageSectionHome ---
+.pageSectionHome {
+  grid-template-rows: max-content auto;
+}
+// --- astrounautImg ---
+.astronautImg {
+  grid-area: 1 / 5 / 2 / 10;
+  width: 100%;
+}
+// --- homeWelcome ---
+.homeWelcome {
+  grid-area: 1 / 1 / 2 / 6;
+  grid-template-rows: max-content 1fr;
+  width: 100%;
+  height: 100%;
+  display: grid;
+  justify-items: start;
+}
+.homeWelcome__heading {
+  letter-spacing: 0.0333em;
+  font-size: 5em;
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 900;
+  text-align: left;
+  margin: 0.5em 0;
+}
+// --- homeWelcomeBtn ---
+.homeWelcomeBtn {
+  position: relative;
+  font-size: 1em;
+  width: 9.5em;
+  letter-spacing: 0.09em;
+  align-self: flex-start;
+  margin-top: 5%;
+  display: flex;
+  justify-content: space-between;
+  padding: 0.5em 0.85em;
+  background: none;
+
+  &::after {
+    transition: $transition;
+    content: '';
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 79.9%;
+    height: 100%;
+    background-color: $accentColor;
+  }
+
+  &:hover:after {
+    width: 100%;
+  }
+}
+.homeWelcomeBtn__text {
+  height: 100%;
+  display: block;
+  margin: auto 0;
+  z-index: 2;
+}
+.homeWelcomeBtn__arrow {
+  height: 1.1em;
+  z-index: 2;
+}
+// --- homeList ---
+.homeList {
+  font-size: 16px;
+  grid-area: 2 / 1 / 3 / 11;
+  height: 100%;
+  margin: 0;
+  padding: 0 1em;
+  border-top: 2px solid $inactiveTextColor;
+  display: grid;
+  grid-template-columns: repeat(3, 31%);
+  justify-content: space-between;
+}
+.homeListItem {
+  position: relative;
+  padding-top: 1em;
+  list-style: none;
+  text-align: left;
+  color: $inactiveTextColor;
+  transition: $transition;
+  cursor: pointer;
+  &::before {
+    position: absolute;
+    transition: $transition;
+    top: -2px;
+    left: 0;
+    content: '';
+    width: 2.5em;
+    height: 0;
+    background-color: $accentColor;
+  }
+
+  &:hover {
+    color: $activeTextColor;
+    &::before {
+      height: 6px;
+    }
+  }
+}
+.homeListItem__heading {
+  font-weight: 700;
+  font-size: 1.125em;
+  text-transform: uppercase;
+  letter-spacing: 0.03em;
+  font-family: "Montserrat", sans-serif;
+}
+.homeListItem__text {
+  line-height: 1.5em;
+  font-size: 1em;
+  font-family: "Montserrat", sans-serif;
 }

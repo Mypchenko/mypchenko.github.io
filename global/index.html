@@ -25,13 +25,37 @@
       <!-- --- section navigation --- -->
       <div class="sectionNavContainer">
       </div>
-      <!-- --- sections themselves --- -->
       <div class="sectionsContainer">
+        <!-- --- page controls ---  -->
         <div class="pageControls">
           <button class="pageControlBtn"><img src="dist/img/btn-arrow.svg" alt="arrow" class="pageControlBtn__img pageControlBtn__img_up"></button>
           <button class="pageControlBtn"><img src="dist/img/btn-arrow.svg" alt="arrow" class="pageControlBtn__img pageControlBtn__img_down"></button>
         </div>
-        <section data-name="Home" class="pageSection col10bootstrapGrid">HOME</section>
+        <!-- --- sections themselves --- -->
+        <section data-name="Home" class="pageSection pageSectionHome col10bootstrapGrid">
+          <img src="dist/img/astronaut.png" alt="astronaut" class="astronautImg">
+          <div class="homeWelcome">
+            <h1 class="homeWelcome__heading">Your next interactive experience</h1>
+            <button class="homeWelcomeBtn globalBtn" onclick="scrollToPage(`Hire us`)">
+              <span class="homeWelcomeBtn__text">Hire us</span>
+              <img src="dist/img/btn-arrow-2.svg" alt="arrow symbol" class="homeWelcomeBtn__arrow">
+            </button>
+          </div>
+          <ul class="homeList">
+            <li class="homeListItem">
+              <h3 class="homeListItem__heading">Metiew & Smith</h3>
+              <p class="homeListItem__text">Nulla, minima voluptates ipsa iure expedita praesentium fugiat harum cumque, alias quaerat reprehenderit voluptas consequatur ut laudantium possimus!</p>
+            </li>
+            <li class="homeListItem">
+              <h3 class="homeListItem__heading">Fantasy Interactive</h3>
+              <p class="homeListItem__text">Nulla, minima voluptates ipsa iure expedita praesentium fugiat harum cumque, alias quaerat reprehenderit voluptas consequatur ut laudantium possimus!</p>
+            </li>
+            <li class="homeListItem">
+              <h3 class="homeListItem__heading">Paul & Shark</h3>
+              <p class="homeListItem__text">Nulla, minima voluptates ipsa iure expedita praesentium fugiat harum cumque, alias quaerat reprehenderit voluptas consequatur ut laudantium possimus!</p>
+            </li>
+          </ul>
+        </section>
         <section data-name="Works" class="pageSection col10bootstrapGrid">WORKS</section>
         <section data-name="About" class="pageSection col10bootstrapGrid">ABOUT</section>
         <section data-name="Contact" class="pageSection col10bootstrapGrid">CONTACT</section>
