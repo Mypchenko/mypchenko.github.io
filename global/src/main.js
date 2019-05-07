@@ -1,8 +1,17 @@
+const globalObj = Object.create(null);
+
 document.body.onload = () => {
+  mainGlobalFunc();
+};
+
+// --- functions ---
+function mainGlobalFunc() {
   // --- page elements ---
 
-  const page = document.getElementsByClassName(`pageContainer`)[0];
-  const pageReturnArea = document.getElementsByClassName(`pageReturnArea`)[0];
+  globalObj.page = document.getElementsByClassName(`pageContainer`)[0];
+  globalObj.pageReturnArea = document.getElementsByClassName(
+    `pageReturnArea`
+  )[0];
   const mainMenuContainer = document.getElementsByClassName(`mainMenu`)[0];
   const mainMenuBtn = document.getElementsByClassName(`mainMenuBtn`)[0];
   const sectionNavContainer = document.getElementsByClassName(
@@ -11,7 +20,7 @@ document.body.onload = () => {
   const sectionsContainer = document.getElementsByClassName(
     `sectionsContainer`
   )[0];
-  const sections = Array.from(sectionsContainer.children).filter(
+  globalObj.sections = Array.from(sectionsContainer.children).filter(
     (val) => val.nodeName === `SECTION`
   );
   const pageControls = document.getElementsByClassName(`pageControls`)[0];
@@ -19,18 +28,18 @@ document.body.onload = () => {
   // --- main menu ---
 
   createMainMenuEntries(
-    sections,
+    globalObj.sections,
     mainMenuContainer,
     mainMenuBtn,
-    pageReturnArea
+    globalObj.pageReturnArea
   );
-  const mainMenuElements = Array.from(
+  globalObj.mainMenuElements = Array.from(
     document.getElementsByClassName(`mainMenuElement`)
   );
 
   // --- section nav ---
 
-  createSectionPoints(sections, sectionNavContainer);
+  createSectionPoints(globalObj.sections, sectionNavContainer);
 
   // --- page controls ---
 
@@ -40,7 +49,7 @@ document.body.onload = () => {
 
   document.addEventListener(`wheel`, wheelEventFunc);
 
-  page.addEventListener(`touchstart`, (outerEvent) => {
+  globalObj.page.addEventListener(`touchstart`, (outerEvent) => {
     if (outerEvent.touches.length == 1) {
       page.addEventListener(`touchend`, touchendEvent);
     }
@@ -66,275 +75,299 @@ document.body.onload = () => {
   });
 
   // --- start section ---
-  const pageSection = {
+  globalObj.pageSection = {
     previous: 0,
     current: 0,
   };
-  let busy = false;
+  globalObj.busy = false;
   activatePage(0);
+}
 
-  // --- functions ---
+function pageControlFunc(event) {
+  if (scrollIsUp(event.target)) {
+    const pageId = formatIdx(
+      globalObj.pageSection.current - 1,
+      globalObj.sections.length
+    );
+    scrollToPage(pageId);
+  } else {
+    const pageId = formatIdx(
+      globalObj.pageSection.current + 1,
+      globalObj.sections.length
+    );
+    scrollToPage(pageId);
+  }
 
-  function pageControlFunc(event) {
-    if (scrollIsUp(event.target)) {
-      const pageId = formatIdx(pageSection.current - 1, sections.length);
-      scrollToPage(pageId);
+  event.stopPropagation;
+
+  function scrollIsUp(target) {
+    if (target.nodeName === `IMG`) {
+      return target.classList.contains(`pageControlBtn__img_up`);
     } else {
-      const pageId = formatIdx(pageSection.current + 1, sections.length);
+      return target.firstChild.classList.contains(`pageControlBtn__img_up`);
+    }
+  }
+}
+
+function swipeAction(time, xChange, yChange, target) {
+  const length = Math.sqrt(xChange ** 2 + yChange ** 2);
+  const angle = calcPathAngle(xChange, yChange);
+
+  if (target.classList.contains(`pageReturnArea`)) return;
+
+  if (time > 50 && length > 10 && angle !== null) {
+    if (angle >= Math.PI / 4 && angle <= 3 * Math.PI / 4) {
+      const pageId = formatIdx(
+        globalObj.pageSection.current + 1,
+        sections.length
+      );
+      scrollToPage(pageId);
+    } else if (angle >= 5 * Math.PI / 4 && angle <= 7 * Math.PI / 4) {
+      const pageId = formatIdx(
+        globalObj.pageSection.current - 1,
+        sections.length
+      );
       scrollToPage(pageId);
     }
+  }
+}
 
-    event.stopPropagation;
+function calcPathAngle(x, y) {
+  const tmp = Math.atan2(y, x);
 
-    function scrollIsUp(target) {
-      if (target.nodeName === `IMG`) {
-        return target.classList.contains(`pageControlBtn__img_up`);
-      } else {
-        return target.firstChild.classList.contains(`pageControlBtn__img_up`);
-      }
-    }
+  if (x === 0 && y === 0) return null;
+  if (tmp < 0) return Math.PI + (Math.PI - tmp * -1);
+
+  return tmp;
+}
+
+function scrollToPage(id) {
+  if (typeof id === `string`) {
+    id = globalObj.sections.indexOf(
+      globalObj.sections.filter((val) => {
+        return val.dataset.name === id;
+      })[0]
+    );
   }
 
-  function swipeAction(time, xChange, yChange, target) {
-    const length = Math.sqrt(xChange ** 2 + yChange ** 2);
-    const angle = calcPathAngle(xChange, yChange);
+  if (!globalObj.busy) {
+    if (globalObj.pageSection.current === id) return;
 
-    if (target.classList.contains(`pageReturnArea`)) return;
+    globalObj.busy = true;
 
-    if (time > 50 && length > 10 && angle !== null) {
-      if (angle >= Math.PI / 4 && angle <= 3 * Math.PI / 4) {
-        const pageId = formatIdx(pageSection.current + 1, sections.length);
-        scrollToPage(pageId);
-      } else if (angle >= 5 * Math.PI / 4 && angle <= 7 * Math.PI / 4) {
-        const pageId = formatIdx(pageSection.current - 1, sections.length);
-        scrollToPage(pageId);
-      }
-    }
-  }
+    const animationIsDownwards =
+      globalObj.pageSection.current - id === 1 ||
+      (id === globalObj.sections.length - 1 &&
+        globalObj.pageSection.current === 0);
 
-  function calcPathAngle(x, y) {
-    const tmp = Math.atan2(y, x);
+    deactivatePage(globalObj.pageSection.current, animationIsDownwards);
+    activatePage(id, animationIsDownwards);
 
-    if (x === 0 && y === 0) return null;
-    if (tmp < 0) return Math.PI + (Math.PI - tmp * -1);
+    globalObj.pageSection.previous = globalObj.pageSection.current;
+    globalObj.pageSection.current = id;
 
-    return tmp;
-  }
-
-  function scrollToPage(id) {
-    if (!busy) {
-      if (page.current === id) return;
-
-      busy = true;
-
-      const animationIsDownwards =
-        pageSection.current - id === 1 ||
-        (id === sections.length - 1 && pageSection.current === 0);
-
-      deactivatePage(pageSection.current, animationIsDownwards);
-      activatePage(id, animationIsDownwards);
-
-      pageSection.previous = pageSection.current;
-      pageSection.current = id;
-
-      setTimeout(() => {
-        busy = false;
-      }, 400);
-    }
-    busy = true;
-  }
-
-  function activatePage(id, animationIsDownwards) {
-    toggleNavigationEntries(id);
-
-    const page = sections[id];
-    const animationClass = animationIsDownwards
-      ? `pageSection_above`
-      : `pageSection_below`;
-
-    page.classList.add(animationClass);
-    page.classList.add(`pageSection_active`);
     setTimeout(() => {
-      page.classList.remove(animationClass);
-    }, 50);
-  }
-
-  function deactivatePage(id, animationIsDownwards) {
-    toggleNavigationEntries(id);
-
-    const page = sections[id];
-    const animationClass = animationIsDownwards
-      ? `pageSection_below`
-      : `pageSection_above`;
-
-    page.classList.add(animationClass);
-    page.classList.remove(`pageSection_active`);
-    setTimeout(() => {
-      page.classList.remove(animationClass);
+      globalObj.busy = false;
     }, 400);
   }
+  globalObj.busy = true;
+}
 
-  function toggleNavigationEntries(id) {
-    const mainMenuEntry = mainMenuElements[id];
-    const sectionNavLPContainer = document.getElementsByClassName(
-      `sectionNavLinePointContainer_active`
-    )[id];
-    sectionNavLPContainer.firstChild.classList.toggle(
-      `sectionNavLinePoint_selected`
+function activatePage(id, animationIsDownwards) {
+  toggleNavigationEntries(id);
+
+  const page = globalObj.sections[id];
+  const animationClass = animationIsDownwards
+    ? `pageSection_above`
+    : `pageSection_below`;
+
+  page.classList.add(animationClass);
+  page.classList.add(`pageSection_active`);
+  setTimeout(() => {
+    page.classList.remove(animationClass);
+  }, 50);
+}
+
+function deactivatePage(id, animationIsDownwards) {
+  toggleNavigationEntries(id);
+
+  const page = globalObj.sections[id];
+  const animationClass = animationIsDownwards
+    ? `pageSection_below`
+    : `pageSection_above`;
+
+  page.classList.add(animationClass);
+  page.classList.remove(`pageSection_active`);
+  setTimeout(() => {
+    page.classList.remove(animationClass);
+  }, 400);
+}
+
+function toggleNavigationEntries(id) {
+  const mainMenuEntry = globalObj.mainMenuElements[id];
+  const sectionNavLPContainer = document.getElementsByClassName(
+    `sectionNavLinePointContainer_active`
+  )[id];
+
+  sectionNavLPContainer.firstChild.classList.toggle(
+    `sectionNavLinePoint_selected`
+  );
+  sectionNavLPContainer.lastChild.classList.toggle(`sectionName_nameShown`);
+  mainMenuEntry.classList.toggle(`mainMenuElement_current`);
+}
+
+function formatIdx(idx, arrLength) {
+  if (idx < 0) return arrLength - 1;
+  return idx % arrLength;
+}
+
+function createElementWithClasses(element, ...classes) {
+  const local = document.createElement(element);
+
+  if (classes.length > 0) {
+    for (let i = 0; i < classes.length; ++i) {
+      local.classList.add(classes[i]);
+    }
+  }
+
+  return local;
+}
+
+function adjustNumLength(num, length) {
+  let str = String(num);
+
+  if (str.length < length) {
+    while (str.length < length) {
+      str = `0` + str;
+    }
+  } else {
+    str = str.slice(str.length - length);
+  }
+
+  return str;
+}
+
+function mainMenuViewToggle(event) {
+  const mainMenuElements = globalObj.mainMenuElements;
+  const isOpeningAnimation = globalObj.page.classList.toggle(
+    `pageContainer_zoomedOut`
+  );
+  setTimeout(() => {
+    globalObj.pageReturnArea.classList.toggle(`inactive`);
+  }, isOpeningAnimation ? 0 : 400);
+
+  const transitionDelayCf = isOpeningAnimation ? 0.05 : 0.02;
+
+  for (let i = 0; i < mainMenuElements.length; ++i) {
+    mainMenuElements[i].style.transitionDelay = `${(isOpeningAnimation
+      ? i
+      : mainMenuElements.length - i - 1) * transitionDelayCf}s`;
+  }
+
+  mainMenuElements.map((element) => {
+    element.classList.toggle(`mainMenuElement_appear`);
+  });
+
+  if (event) event.stopPropagation;
+}
+
+function wheelEventFunc(event) {
+  if (event.deltaY < 0) {
+    const pageId = formatIdx(
+      globalObj.pageSection.current - 1,
+      globalObj.sections.length
     );
-    sectionNavLPContainer.lastChild.classList.toggle(`sectionName_nameShown`);
-    mainMenuEntry.classList.toggle(`mainMenuElement_current`);
+    scrollToPage(pageId);
+  } else if (event.deltaY > 0) {
+    const pageId = formatIdx(
+      globalObj.pageSection.current + 1,
+      globalObj.sections.length
+    );
+    scrollToPage(pageId);
   }
 
-  function formatIdx(idx, arrLength) {
-    if (idx < 0) return arrLength - 1;
-    return idx % arrLength;
+  event.preventDefault;
+}
+
+function createMainMenuEntries(entriesSource, container, ...menuButtons) {
+  const list = document.createElement(`ul`);
+  for (let i = 0; i < entriesSource.length; ++i) {
+    const entry = entriesSource[i];
+    const menuElement = createElementWithClasses(`li`, `mainMenuElement`);
+    menuElement.textContent = entry.dataset.name;
+    menuElement.dataset.idx = i;
+    menuElement.addEventListener(`click`, mainMenuClickFunc);
+    list.appendChild(menuElement);
   }
+  container.appendChild(list);
 
-  function createElementWithClasses(element, ...classes) {
-    const local = document.createElement(element);
-
-    if (classes.length > 0) {
-      for (let i = 0; i < classes.length; ++i) {
-        local.classList.add(classes[i]);
-      }
-    }
-
-    return local;
+  for (const button of menuButtons) {
+    button.addEventListener(`click`, mainMenuViewToggle);
   }
+}
 
-  function adjustNumLength(num, length) {
-    let str = String(num);
+function createSectionPoints(entriesSource, container) {
+  const sectionNavLinePointContainer = createElementWithClasses(
+    `div`,
+    `sectionNavLinePointContainer`
+  );
+  const sectionNavLinePoint = createElementWithClasses(
+    `div`,
+    `sectionNavLinePoint`
+  );
+  sectionNavLinePointContainer.appendChild(sectionNavLinePoint.cloneNode());
 
-    if (str.length < length) {
-      while (str.length < length) {
-        str = `0` + str;
-      }
-    } else {
-      str = str.slice(str.length - length);
-    }
-
-    return str;
-  }
-
-  function mainMenuViewToggle(event) {
-    const isOpeningAnimation = page.classList.toggle(`pageContainer_zoomedOut`);
-    setTimeout(() => {
-      pageReturnArea.classList.toggle(`inactive`);
-    }, isOpeningAnimation ? 0 : 400);
-
-    const transitionDelayCf = isOpeningAnimation ? 0.05 : 0.02;
-
-    for (let i = 0; i < mainMenuElements.length; ++i) {
-      mainMenuElements[i].style.transitionDelay = `${(isOpeningAnimation
-        ? i
-        : mainMenuElements.length - i - 1) * transitionDelayCf}s`;
-    }
-
-    mainMenuElements.map((element) => {
-      element.classList.toggle(`mainMenuElement_appear`);
+  for (let i = 0; i < entriesSource.length; ++i) {
+    const containerCopy = sectionNavLinePointContainer.cloneNode({
+      deep: true,
     });
 
-    if (event) event.stopPropagation;
-  }
+    containerCopy.firstChild.classList.add(`sectionNavLinePoint_active`);
+    containerCopy.classList.add(`sectionNavLinePointContainer_active`);
 
-  function wheelEventFunc(event) {
-    if (event.deltaY < 0) {
-      const pageId = formatIdx(pageSection.current - 1, sections.length);
-      scrollToPage(pageId);
-    } else if (event.deltaY > 0) {
-      const pageId = formatIdx(pageSection.current + 1, sections.length);
-      scrollToPage(pageId);
-    }
+    const sectionName = createElementWithClasses(`div`, `sectionName`);
 
-    event.preventDefault;
-  }
+    const numberSpan = createElementWithClasses(`span`, `sectionName__number`);
+    numberSpan.textContent = adjustNumLength(i + 1, 2);
+    numberSpan.dataset.idx = i;
+    numberSpan.addEventListener(`click`, sectionPointClickEvent);
 
-  function createMainMenuEntries(entriesSource, container, ...menuButtons) {
-    const list = document.createElement(`ul`);
-    for (let i = 0; i < entriesSource.length; ++i) {
-      const entry = entriesSource[i];
-      const menuElement = createElementWithClasses(`li`, `mainMenuElement`);
-      menuElement.textContent = entry.dataset.name;
-      menuElement.dataset.idx = i;
-      menuElement.addEventListener(`click`, mainMenuClickFunc);
-      list.appendChild(menuElement);
-    }
-    container.appendChild(list);
+    const nameSpan = createElementWithClasses(`span`, `sectionName__name`);
+    nameSpan.textContent = entriesSource[i].dataset.name;
 
-    for (const button of menuButtons) {
-      button.addEventListener(`click`, mainMenuViewToggle);
-    }
-  }
+    sectionName.appendChild(numberSpan);
+    sectionName.appendChild(nameSpan);
 
-  function createSectionPoints(entriesSource, container) {
-    const sectionNavLinePointContainer = createElementWithClasses(
-      `div`,
-      `sectionNavLinePointContainer`
-    );
-    const sectionNavLinePoint = createElementWithClasses(
-      `div`,
-      `sectionNavLinePoint`
-    );
-    sectionNavLinePointContainer.appendChild(sectionNavLinePoint.cloneNode());
+    containerCopy.appendChild(sectionName);
+    container.appendChild(containerCopy);
 
-    for (let i = 0; i < sections.length; ++i) {
-      const containerCopy = sectionNavLinePointContainer.cloneNode({
-        deep: true,
-      });
-
-      containerCopy.firstChild.classList.add(`sectionNavLinePoint_active`);
-      containerCopy.classList.add(`sectionNavLinePointContainer_active`);
-
-      const sectionName = createElementWithClasses(`div`, `sectionName`);
-
-      const numberSpan = createElementWithClasses(
-        `span`,
-        `sectionName__number`
-      );
-      numberSpan.textContent = adjustNumLength(i + 1, 2);
-      numberSpan.dataset.idx = i;
-      numberSpan.addEventListener(`click`, sectionPointClickEvent);
-
-      const nameSpan = createElementWithClasses(`span`, `sectionName__name`);
-      nameSpan.textContent = sections[i].dataset.name;
-
-      sectionName.appendChild(numberSpan);
-      sectionName.appendChild(nameSpan);
-
-      containerCopy.appendChild(sectionName);
-      container.appendChild(containerCopy);
-
-      if (i < sections.length - 1) {
-        for (let i = 0; i < 3; ++i) {
-          container.appendChild(
-            sectionNavLinePointContainer.cloneNode({ deep: true })
-          );
-        }
+    if (i < entriesSource.length - 1) {
+      for (let i = 0; i < 3; ++i) {
+        container.appendChild(
+          sectionNavLinePointContainer.cloneNode({ deep: true })
+        );
       }
     }
   }
+}
 
-  function sectionPointClickEvent(event) {
-    const id = Number(event.target.dataset.idx);
+function sectionPointClickEvent(event) {
+  const id = Number(event.target.dataset.idx);
 
-    if (
-      event.target.parentElement.classList.contains(`sectionName_nameShown`)
-    ) {
-      return;
-    }
+  if (event.target.parentElement.classList.contains(`sectionName_nameShown`)) {
+    return;
+  }
 
+  scrollToPage(id);
+}
+
+function mainMenuClickFunc(event) {
+  const id = Number(event.target.dataset.idx);
+
+  if (event.target.classList.contains(`mainMenuElement_current`)) return;
+
+  mainMenuViewToggle();
+  setTimeout(() => {
     scrollToPage(id);
-  }
-
-  function mainMenuClickFunc(event) {
-    const id = Number(event.target.dataset.idx);
-
-    if (event.target.classList.contains(`mainMenuElement_current`)) return;
-
-    mainMenuViewToggle();
-    setTimeout(() => {
-      scrollToPage(id);
-    }, 200);
-  }
-};
+  }, 200);
+}
