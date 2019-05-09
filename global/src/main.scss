@@ -164,11 +164,17 @@ $transition: 0.4s cubic-bezier(0.46, 0.03, 0.52, 0.96);
 
 // --- headerBtn ---
 .headerBtn {
+  position: relative;
+  opacity: 0;
+  transition: $transition;
   font-size: 14px;
   letter-spacing: 0.08em;
   width: 6.43em;
   height: 2.22em;
   grid-column: 6 / span 2;
+}
+.headerBtn_visible {
+  opacity: 1;
 }
 
 // --- logo* ---

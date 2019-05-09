@@ -154,6 +154,7 @@ function scrollToPage(id) {
     if (globalObj.pageSection.current === id) return;
 
     globalObj.busy = true;
+    const headerBtn = document.getElementsByClassName(`headerBtn`)[0];
 
     const animationIsDownwards =
       globalObj.pageSection.current - id === 1 ||
@@ -162,6 +163,19 @@ function scrollToPage(id) {
 
     deactivatePage(globalObj.pageSection.current, animationIsDownwards);
     activatePage(id, animationIsDownwards);
+    if (id !== 0) {
+      headerBtn.classList.remove(`inactive`);
+      window.requestAnimationFrame(() => {
+        window.requestAnimationFrame(() => {
+          headerBtn.classList.add(`headerBtn_visible`);
+        });
+      });
+    } else {
+      headerBtn.classList.remove(`headerBtn_visible`);
+      setTimeout(() => {
+        headerBtn.classList.add(`inactive`);
+      }, 400);
+    }
 
     globalObj.pageSection.previous = globalObj.pageSection.current;
     globalObj.pageSection.current = id;
