@@ -1,4 +1,5 @@
 const globalObj = Object.create(null);
+globalObj.transition = 400;
 
 document.body.onload = () => {
   mainGlobalFunc();
@@ -174,7 +175,7 @@ function scrollToPage(id) {
       headerBtn.classList.remove(`headerBtn_visible`);
       setTimeout(() => {
         headerBtn.classList.add(`inactive`);
-      }, 400);
+      }, globalObj.transition);
     }
 
     globalObj.pageSection.previous = globalObj.pageSection.current;
@@ -182,7 +183,7 @@ function scrollToPage(id) {
 
     setTimeout(() => {
       globalObj.busy = false;
-    }, 400);
+    }, globalObj.transition);
   }
   globalObj.busy = true;
 }
@@ -214,7 +215,7 @@ function deactivatePage(id, animationIsDownwards) {
   page.classList.remove(`pageSection_active`);
   setTimeout(() => {
     page.classList.remove(animationClass);
-  }, 400);
+  }, globalObj.transition);
 }
 
 function toggleNavigationEntries(id) {
@@ -231,7 +232,7 @@ function toggleNavigationEntries(id) {
 }
 
 function formatIdx(idx, arrLength) {
-  if (idx < 0) return arrLength - 1;
+  if (idx < 0) return arrLength + idx;
   return idx % arrLength;
 }
 
@@ -268,7 +269,7 @@ function mainMenuViewToggle(event) {
   );
   setTimeout(() => {
     globalObj.pageReturnArea.classList.toggle(`inactive`);
-  }, isOpeningAnimation ? 0 : 400);
+  }, isOpeningAnimation ? 0 : globalObj.transition);
 
   const transitionDelayCf = isOpeningAnimation ? 0.05 : 0.02;
 
