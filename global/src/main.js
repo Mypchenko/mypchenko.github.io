@@ -49,14 +49,15 @@ function mainGlobalFunc() {
   // --- scrolling events ---
 
   document.addEventListener(`wheel`, wheelEventFunc);
+  console.log(globalObj);
 
   globalObj.page.addEventListener(`touchstart`, (outerEvent) => {
     if (outerEvent.touches.length == 1) {
-      page.addEventListener(`touchend`, touchendEvent);
+      globalObj.page.addEventListener(`touchend`, touchendEvent);
     }
 
     function touchendEvent(innerEvent) {
-      page.removeEventListener(`touchend`, touchendEvent);
+      globalObj.page.removeEventListener(`touchend`, touchendEvent);
 
       const xChange =
         innerEvent.changedTouches[0].clientX -
@@ -260,13 +261,13 @@ function swipeAction(time, xChange, yChange, target) {
     if (angle >= Math.PI / 4 && angle <= 3 * Math.PI / 4) {
       const pageId = formatIdx(
         globalObj.pageSection.current + 1,
-        sections.length
+        globalObj.sections.length
       );
       scrollToPage(pageId);
     } else if (angle >= 5 * Math.PI / 4 && angle <= 7 * Math.PI / 4) {
       const pageId = formatIdx(
         globalObj.pageSection.current - 1,
-        sections.length
+        globalObj.sections.length
       );
       scrollToPage(pageId);
     }
