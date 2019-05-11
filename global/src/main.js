@@ -82,6 +82,146 @@ function mainGlobalFunc() {
   };
   globalObj.busy = false;
   activatePage(0);
+  // --- slider init ---
+  sliderInit();
+}
+
+function sliderInit() {
+  globalObj.sliderBusy = false;
+  globalObj.sliderClasses = [
+    `sliderItem_left`,
+    `sliderItem_center`,
+    `sliderItem_right`,
+  ];
+  globalObj.sliderContainer = document.getElementsByClassName(
+    `sliderContent`
+  )[0];
+  globalObj.sliderEntries = Array.from(globalObj.sliderContainer.children);
+  globalObj.sliderLength = globalObj.sliderEntries.length;
+  globalObj.sliderCurIdx = 1;
+
+  for (let i = 3, n = globalObj.sliderEntries.length; i < n; ++i) {
+    globalObj.sliderEntries[i].remove();
+  }
+
+  nodesAddClasses(globalObj.sliderContainer.children, globalObj.sliderClasses);
+}
+
+function sliderAction(str) {
+  if (!globalObj.sliderBusy) {
+    let directionIsLeft = true;
+
+    if (str[0].toLowerCase() === `r`) {
+      directionIsLeft = false;
+    } else if (str[0].toLowerCase() !== `l`) {
+      throw new Error(`Wrong slider action direction`);
+    }
+
+    nodesRemoveClasses(
+      globalObj.sliderContainer.children,
+      globalObj.sliderClasses
+    );
+
+    const addIdx = formatIdx(
+      globalObj.sliderCurIdx + 2 * (directionIsLeft ? -1 : 1),
+      globalObj.sliderLength
+    );
+    const insertNode = directionIsLeft
+      ? globalObj.sliderContainer.children[0]
+      : null;
+
+    globalObj.sliderContainer.insertBefore(
+      globalObj.sliderEntries[addIdx],
+      insertNode
+    );
+
+    nodesAddClasses(
+      Array.from(globalObj.sliderContainer.children).slice(1, 3),
+      globalObj.sliderClasses.slice(directionIsLeft ? 1 : 0, 3)
+    );
+
+    console.log(`--------`);
+
+    console.log(directionIsLeft);
+
+    if (directionIsLeft) {
+      globalObj.sliderContainer.children[0].classList.add(
+        [`sliderItem_offscreenLeft`, `sliderItem_offscreenRight`][0]
+      );
+      globalObj.sliderContainer.children[3].classList.add(`sliderItem_right`);
+    } else {
+      globalObj.sliderContainer.children[3].classList.add(
+        [`sliderItem_offscreenLeft`, `sliderItem_offscreenRight`][1]
+      );
+      globalObj.sliderContainer.children[0].classList.add(
+        [`sliderItem_offscreenLeft`, `sliderItem_offscreenRight`][0]
+      );
+    }
+
+    window.requestAnimationFrame(() => {
+      window.requestAnimationFrame(() => {
+        if (directionIsLeft) {
+          globalObj.sliderContainer.children[3].classList.add(
+            [`sliderItem_offscreenLeft`, `sliderItem_offscreenRight`][1]
+          );
+          globalObj.sliderContainer.children[3].classList.remove(
+            `sliderItem_right`
+          );
+          nodesAddClasses(
+            Array.from(globalObj.sliderContainer.children).slice(0, 1),
+            globalObj.sliderClasses.slice(0, 1)
+          );
+        } else {
+          nodesAddClasses(
+            Array.from(globalObj.sliderContainer.children).slice(3),
+            globalObj.sliderClasses.slice(2)
+          );
+        }
+
+        setTimeout(() => {
+          globalObj.sliderContainer.children[
+            directionIsLeft ? 3 : 0
+          ].classList.remove(
+            [`sliderItem_offscreenLeft`, `sliderItem_offscreenRight`][
+              directionIsLeft ? 1 : 0
+            ]
+          );
+          globalObj.sliderContainer.children[
+            directionIsLeft ? 0 : 3
+          ].classList.remove(
+            [`sliderItem_offscreenLeft`, `sliderItem_offscreenRight`][
+              directionIsLeft ? 0 : 1
+            ]
+          );
+
+          const removeIdx = directionIsLeft
+            ? globalObj.sliderContainer.children.length - 1
+            : 0;
+          globalObj.sliderContainer.children[removeIdx].remove();
+
+          globalObj.sliderCurIdx = formatIdx(
+            globalObj.sliderCurIdx + 1 * (directionIsLeft ? -1 : 1),
+            globalObj.sliderEntries.length
+          );
+
+          globalObj.sliderBusy = false;
+        }, globalObj.transition);
+      });
+    });
+  }
+  globalObj.sliderBusy = true;
+}
+
+function nodesAddClasses(nodes, classes) {
+  for (let i = 0; i < classes.length && i < nodes.length; ++i) {
+    nodes[i].classList.add(classes[i]);
+  }
+}
+
+function nodesRemoveClasses(nodes, classes) {
+  for (let i = 0; i < classes.length && i < nodes.length; ++i) {
+    nodes[i].classList.remove(classes[i]);
+  }
 }
 
 function pageControlFunc(event) {
