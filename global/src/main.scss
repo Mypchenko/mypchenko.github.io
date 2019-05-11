@@ -465,7 +465,7 @@ $transition: 0.4s cubic-bezier(0.46, 0.03, 0.52, 0.96);
   font-size: 2em;
   font-family: "Montserrat", sans-serif;
   font-weight: 900;
-  letter-spacing: 0.02em;
+  letter-spacing: 0.06em;
   grid-area: 1 / 1 / 2 / 11;
 }
 // --- sliderArrow ---
@@ -538,7 +538,8 @@ $transition: 0.4s cubic-bezier(0.46, 0.03, 0.52, 0.96);
   font-size: 0.8em;
   width: 80%;
   position: absolute;
-  top: calc(100% + 1.5em);
+  top: calc(100% + 1.25em);
+  margin: 0;
   font-size: 1.125em;
   letter-spacing: 0.1em;
   font-weight: 700;
@@ -548,9 +549,10 @@ $transition: 0.4s cubic-bezier(0.46, 0.03, 0.52, 0.96);
   transition: $transition;
   opacity: 0;
   position: absolute;
-  top: calc(100% + 5em);
+  top: calc(100% + 2.75em);
+  line-height: 1.75em;
   width: 80%;
-  letter-spacing: 0.02em;
+  letter-spacing: 0.03em;
 }
 .sliderItem_offscreenLeft, .sliderItem_offscreenRight {
   transform: scale(0);
